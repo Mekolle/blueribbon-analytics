@@ -4,15 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-GEXEQWJWHE"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag("js", new Date());
-  gtag("config", "G-GEXEQWJWHE");
-</script>
-
 <title>Blueribbon Analytics | Power BI Reporting Systems for Small Businesses</title>
 <meta name="description" content="I build automated Power BI reporting systems for small businesses, so owners spend less time pulling reports and more time running the business.">
 <meta name="keywords" content="Power BI dashboard, small business reporting, data automation, business intelligence consultant, reporting system, RFM customer segmentation, dashboard design, Royce Mekolle, Blueribbon Analytics">
@@ -74,7 +65,9 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;600;700&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;600;700&family=Space+Mono:wght@400&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;600;700&family=Space+Mono:wght@400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;600;700&family=Space+Mono:wght@400&display=swap" rel="stylesheet"></noscript>
 
 <style>
   :root{
@@ -518,6 +511,15 @@
     .case-card{flex-basis:88vw;}
   }
 </style>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GEXEQWJWHE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  gtag("config", "G-GEXEQWJWHE");
+</script>
 </head>
 <body>
 <a href="#main-content" class="skip-link">Skip to content</a>
@@ -859,7 +861,6 @@
         <p>Real feedback from the businesses I've helped bring their data into focus.</p>
       </div>
       <div class="famewall-embed" data-src="blueribbonanalytics" data-format="carousel" data-autoplay="1" style="width:100%;display:block!important;"></div>
-      <script type="text/javascript" src="https://embed.famewall.io/newFrame.js" defer></script>
     </div>
   </section>
 
@@ -1046,6 +1047,32 @@
       }
     });
   });
+
+  // Load the testimonials widget only once it's about to scroll into view,
+  // instead of on initial page load, to keep main-thread work off the critical path.
+  var famewallEl = document.querySelector('.famewall-embed');
+  if(famewallEl){
+    function loadFamewall(){
+      if(document.querySelector('script[data-famewall-loaded]')) return;
+      var s = document.createElement('script');
+      s.src = 'https://embed.famewall.io/newFrame.js';
+      s.setAttribute('data-famewall-loaded', '1');
+      document.body.appendChild(s);
+    }
+    if('IntersectionObserver' in window){
+      var fwObserver = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){
+            loadFamewall();
+            fwObserver.disconnect();
+          }
+        });
+      }, {rootMargin:'400px 0px'});
+      fwObserver.observe(famewallEl);
+    } else {
+      loadFamewall();
+    }
+  }
 })();
 </script>
 
