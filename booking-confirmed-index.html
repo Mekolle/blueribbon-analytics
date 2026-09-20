@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Booking Confirmed | Blueribbon Analytics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --ink:#12213C;
+    --paper:#F7F5F0;
+    --white:#FFFFFF;
+    --signal:#1F6F7A;
+    --signal-dark:#164F57;
+    --gold:#C9A227;
+    --line:#DDD7C8;
+    --muted:#5B5F6B;
+    --radius:2px;
+    --maxw:780px;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+  }
+  h1,h2{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    line-height:1.15;
+    margin:0;
+    color:var(--ink);
+  }
+  p{margin:0;}
+  a{color:inherit;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px;}
+
+  header.site-nav{
+    border-bottom:1px solid var(--line);
+    background:var(--paper);
+  }
+  .nav-inner{
+    max-width:1180px; margin:0 auto; padding:18px 32px;
+  }
+  .logo{
+    font-family:'Fraunces', serif; font-weight:600; font-size:1.25rem;
+    letter-spacing:0.01em;
+  }
+  .logo span{color:var(--signal);}
+
+  section.confirm-hero{padding:96px 0 40px; text-align:center;}
+  .check-badge{
+    width:64px; height:64px; border-radius:50%;
+    background:var(--signal); color:var(--white);
+    display:flex; align-items:center; justify-content:center;
+    margin:0 auto 32px; font-size:28px;
+  }
+  .confirm-hero h1{font-size:clamp(1.8rem, 3vw, 2.4rem); max-width:24ch; margin:0 auto 18px;}
+  .confirm-hero p{font-size:1.05rem; color:var(--muted); max-width:52ch; margin:0 auto;}
+
+  section.next-steps{padding:48px 0 88px;}
+  .steps-card{
+    background:var(--white); border:1px solid var(--line);
+    border-radius:var(--radius); padding:40px;
+  }
+  .steps-card h2{font-size:1.05rem; font-weight:600; font-family:'IBM Plex Sans', sans-serif; color:var(--signal-dark); margin-bottom:24px;}
+  .step-row{display:flex; gap:16px; margin-bottom:22px;}
+  .step-row:last-child{margin-bottom:0;}
+  .step-num{
+    font-family:'Fraunces', serif; color:var(--gold); font-size:1.1rem;
+    flex-shrink:0; width:24px;
+  }
+  .step-text p{color:var(--muted); font-size:0.98rem;}
+  .step-text strong{color:var(--ink);}
+
+  footer{padding:40px 0; text-align:center;}
+  footer a{text-decoration:none; color:var(--signal-dark); font-size:0.92rem;}
+  .footer-bottom{font-size:0.82rem; color:var(--muted); margin-top:16px;}
+
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <div class="logo">blue<span>ribbon</span> analytics</div>
+  </div>
+</header>
+
+<section class="confirm-hero">
+  <div class="wrap">
+    <div class="check-badge">&#10003;</div>
+    <h1>Your call is booked.</h1>
+    <p>You'll get a calendar invite by email in the next few minutes with the details and a link to join. I'm looking forward to talking through what's going on with your reporting.</p>
+  </div>
+</section>
+
+<section class="next-steps">
+  <div class="wrap">
+    <div class="steps-card">
+      <h2>Before the call</h2>
+      <div class="step-row">
+        <div class="step-num">01</div>
+        <div class="step-text"><p><strong>Check your email</strong> for the calendar invite and add it to your calendar so it doesn't slip.</p></div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">02</div>
+        <div class="step-text"><p><strong>Think about where your reporting breaks down today</strong>, which tools hold your data, and what you wish you could see without having to ask someone to pull it.</p></div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">03</div>
+        <div class="step-text"><p><strong>Come as you are.</strong> No prep required, this is a conversation about your business, not a sales pitch.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <a href="/">Return to homepage</a>
+  <div class="footer-bottom">Copyright &copy; 2026 Blueribbon Analytics. All rights reserved.</div>
+</footer>
+
+</body>
+</html>
