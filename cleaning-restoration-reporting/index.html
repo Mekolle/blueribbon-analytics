@@ -1,0 +1,204 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Power BI Reporting System for Restoration and Cleaning Companies | Blueribbon Analytics</title><meta name="description" content="See profit by job and unpaid insurance invoices in one live reporting system built for restoration and cleaning companies. Live within 30 days. Book a free call."><meta name="robots" content="index, follow"><meta property="og:title" content="Power BI Reporting System for Restoration and Cleaning Companies | Blueribbon Analytics"><meta property="og:description" content="See profit by job and unpaid insurance invoices in one live reporting system built for restoration and cleaning companies. Live within 30 days. Book a free call."><meta property="og:type" content="website"><meta property="og:url" content="https://blueribbonanalytics.com/cleaning-restoration-reporting/"><meta property="og:image" content="https://blueribbonanalytics.com/og-image.png"><meta name="twitter:card" content="summary_large_image"><link rel="canonical" href="https://blueribbonanalytics.com/cleaning-restoration-reporting/"><link rel="icon" href="assets/favicon-favicon.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet"><style>/* Blueribbon landing page styles. All selectors are namespaced with .bb- so the block
+   can be pasted into Systeme.io or any page builder without clashing. */
+
+.bb-wrap {
+  --bb-navy: #0B1729;
+  --bb-navy-mid: #122036;
+  --bb-navy-light: #1A2D4A;
+  --bb-gold: #D4A74E;
+  --bb-gold-light: #E8C06A;
+  --bb-gold-dim: rgba(212, 167, 78, 0.15);
+  --bb-white: #FFFFFF;
+  --bb-gray-100: #F0F1F4;
+  --bb-gray-300: #A0ABBE;
+  --bb-gray-400: #7A8BA4;
+  --bb-body-dark: #C8D0DC;
+  --bb-body-light: #3D4B63;
+  --bb-line-light: #DDE1E8;
+
+  font-family: 'Inter', -apple-system, 'Segoe UI', sans-serif;
+  color: var(--bb-body-dark);
+  background: var(--bb-navy);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+.bb-wrap, .bb-wrap *, .bb-wrap *::before, .bb-wrap *::after { box-sizing: border-box; }
+:where(.bb-wrap) :where(h1, h2, h3, p, ul, ol, figure) { margin: 0; padding: 0; }
+:where(.bb-wrap) :where(ul, ol) { list-style: none; }
+.bb-wrap a { color: inherit; text-decoration: none; }
+
+/* Layout */
+.bb-inner { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+.bb-section { padding: 84px 0; }
+.bb-dark { background: var(--bb-navy); color: var(--bb-body-dark); }
+.bb-dark-alt { background: var(--bb-navy-mid); color: var(--bb-body-dark); }
+.bb-light { background: var(--bb-gray-100); color: var(--bb-body-light); }
+.bb-light h2, .bb-light h3 { color: var(--bb-navy-light); }
+.bb-dark h1, .bb-dark h2, .bb-dark h3, .bb-dark-alt h2, .bb-dark-alt h3 { color: var(--bb-white); }
+
+/* Type */
+.bb-wrap h1, .bb-wrap h2 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; line-height: 1.15; }
+.bb-wrap h1 { font-size: clamp(28px, 3.7vw, 44px); letter-spacing: -0.01em; }
+.bb-wrap h2 { font-size: clamp(26px, 3.4vw, 38px); letter-spacing: -0.005em; margin-bottom: 20px; }
+.bb-wrap h3 { font-size: 19px; font-weight: 600; line-height: 1.3; }
+.bb-eyebrow { font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bb-gold); margin-bottom: 18px; }
+.bb-sub { font-size: 18px; margin-top: 22px; max-width: 640px; }
+.bb-center { text-align: center; }
+.bb-center .bb-sub { margin-left: auto; margin-right: auto; }
+
+/* Nav */
+.bb-nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; max-width: 1120px; margin: 0 auto; }
+.bb-mark { font-family: 'Playfair Display', Georgia, serif; font-size: 22px; font-weight: 700; color: var(--bb-white); }
+.bb-mark span { color: var(--bb-gold); }
+.bb-mark img { height: 34px; display: block; }
+
+/* Buttons */
+.bb-btn { display: inline-block; background: var(--bb-gold); color: var(--bb-navy) !important; font-weight: 700; font-size: 16px; padding: 16px 30px; border-radius: 8px; transition: background .15s ease, transform .15s ease; }
+.bb-btn:hover { background: var(--bb-gold-light); transform: translateY(-1px); }
+.bb-btn-sm { padding: 10px 20px; font-size: 14px; }
+
+/* Hero */
+.bb-hero { padding: 36px 0 84px; }
+.bb-hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 48px; align-items: center; margin-top: 28px; }
+.bb-cta-row { margin-top: 30px; }
+.bb-fud { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 18px; font-size: 14px; color: var(--bb-gray-300); }
+.bb-fud li::before { content: "\2713"; color: var(--bb-gold); font-weight: 700; margin-right: 8px; }
+.bb-proof-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+.bb-chip { background: var(--bb-gold-dim); border: 1px solid rgba(212,167,78,.35); color: var(--bb-gold-light); font-size: 14px; font-weight: 600; padding: 9px 16px; border-radius: 999px; }
+.bb-quote-chip { max-width: 440px; border-left: 3px solid var(--bb-gold); padding: 4px 0 4px 14px; font-size: 15px; color: var(--bb-body-dark); }
+.bb-quote-chip cite { display: block; font-style: normal; font-size: 13px; color: var(--bb-gray-400); margin-top: 4px; }
+
+/* Hero visual */
+.bb-visual { position: relative; }
+.bb-ba { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.bb-ba-panel { background: var(--bb-navy-mid); border: 1px solid var(--bb-navy-light); border-radius: 12px; padding: 12px; }
+.bb-ba-panel.after { border-color: var(--bb-gold); box-shadow: 0 0 0 1px var(--bb-gold-dim), 0 18px 40px rgba(0,0,0,.35); }
+.bb-ba-label { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--bb-gray-300); margin-bottom: 10px; }
+.bb-ba-panel.after .bb-ba-label { color: var(--bb-gold); }
+.bb-ba-panel img { width: 100%; height: auto; border-radius: 8px; display: block; }
+.bb-mock-sheet { display: grid; grid-template-columns: repeat(5, 1fr); gap: 3px; }
+.bb-mock-sheet i { display: block; height: 16px; background: #22344F; border-radius: 2px; }
+.bb-mock-sheet i:nth-child(7n) { background: #5A2E33; }
+.bb-mock-sheet i:nth-child(5n+2) { background: #2B4262; }
+.bb-mock-sheet i:nth-child(11n) { background: #6A5A2A; }
+.bb-mock-report { display: grid; gap: 8px; }
+.bb-mock-kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.bb-mock-kpis i { display: block; height: 34px; background: var(--bb-navy-light); border-top: 2px solid var(--bb-gold); border-radius: 4px; }
+.bb-mock-bars { display: flex; align-items: flex-end; gap: 6px; height: 92px; background: var(--bb-navy-light); border-radius: 6px; padding: 8px; }
+.bb-mock-bars i { flex: 1; background: var(--bb-gold); border-radius: 3px 3px 0 0; opacity: .9; }
+.bb-mock-note { font-size: 11px; color: var(--bb-gray-400); margin-top: 10px; }
+.bb-single-visual img { width: 100%; border-radius: 12px; display: block; border: 1px solid var(--bb-navy-light); }
+
+/* Placeholder marker, visible on purpose so nothing ships unresolved */
+.bb-ph { background: #F6D365; color: #3b2f00; padding: 0 5px; border-radius: 4px; font-weight: 600; }
+
+/* Proof */
+.bb-stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px 56px; margin: 8px 0 40px; }
+.bb-stat { text-align: center; }
+.bb-stat b { display: block; font-family: 'Playfair Display', Georgia, serif; font-size: 40px; color: var(--bb-gold); line-height: 1.1; }
+.bb-light .bb-stat b { color: #A9781F; }
+.bb-stat span { font-size: 14px; }
+.bb-wall { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; margin-top: 8px; }
+.bb-card { background: var(--bb-white); border: 1px solid var(--bb-line-light); border-radius: 12px; padding: 24px; }
+.bb-dark .bb-card, .bb-dark-alt .bb-card { background: var(--bb-navy-light); border-color: rgba(255,255,255,.08); }
+.bb-card p { font-size: 16px; }
+.bb-card cite { display: block; font-style: normal; font-size: 14px; font-weight: 600; margin-top: 14px; }
+.bb-card cite small { display: block; font-weight: 400; color: var(--bb-gray-400); }
+.bb-embed { margin-top: 12px; }
+.bb-note { font-size: 13px; color: var(--bb-gray-400); margin-top: 18px; text-align: center; }
+
+/* Pain */
+.bb-letter { max-width: 720px; margin: 0 auto; font-size: 18px; }
+.bb-letter p { margin-top: 20px; }
+.bb-letter .bb-dear { font-weight: 600; font-size: 20px; margin-top: 28px; color: var(--bb-navy-light); }
+.bb-checks li, .bb-cross li { position: relative; padding-left: 34px; margin-top: 12px; }
+.bb-checks li::before { content: "\2713"; position: absolute; left: 0; top: 0; width: 22px; height: 22px; border-radius: 50%; background: var(--bb-gold); color: var(--bb-navy); font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin-top: 3px; }
+.bb-cross li::before { content: "\2715"; position: absolute; left: 0; top: 0; width: 22px; height: 22px; border-radius: 50%; background: #E6C9CC; color: #8A2530; font-size: 12px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin-top: 3px; }
+.bb-letter .bb-cost { font-weight: 600; color: var(--bb-navy-light); }
+.bb-letter .bb-solve { border-left: 4px solid var(--bb-gold); padding-left: 20px; margin-top: 30px; }
+
+/* Value props */
+.bb-vp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
+.bb-vp { background: var(--bb-navy-light); border: 1px solid rgba(255,255,255,.07); border-radius: 12px; padding: 26px; }
+.bb-vp-label { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--bb-gold); margin-bottom: 12px; }
+.bb-vp h3 { font-size: 19px; margin-bottom: 10px; }
+.bb-vp p { font-size: 15px; color: var(--bb-body-dark); }
+
+/* How it works */
+.bb-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 40px; counter-reset: step; }
+.bb-step { background: var(--bb-white); border: 1px solid var(--bb-line-light); border-radius: 12px; padding: 26px; counter-increment: step; color: var(--bb-body-light); }
+.bb-step::before { content: counter(step); display: flex; width: 38px; height: 38px; border-radius: 50%; background: var(--bb-navy-light); color: var(--bb-gold); font-family: 'Playfair Display', Georgia, serif; font-weight: 700; align-items: center; justify-content: center; margin-bottom: 16px; }
+.bb-wrap .bb-step h3 { margin-bottom: 8px; color: var(--bb-navy-light); }
+.bb-step p { font-size: 15px; }
+
+/* FAQ */
+.bb-faq { max-width: 780px; margin: 32px auto 0; }
+.bb-faq details { border-bottom: 1px solid rgba(255,255,255,.12); padding: 18px 0; }
+.bb-faq summary { cursor: pointer; font-weight: 600; font-size: 18px; color: var(--bb-white); list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+.bb-faq summary::-webkit-details-marker { display: none; }
+.bb-faq summary::after { content: "+"; color: var(--bb-gold); font-size: 24px; line-height: 1; }
+.bb-faq details[open] summary::after { content: "\2212"; }
+.bb-faq p { margin-top: 12px; font-size: 16px; }
+
+/* Closer */
+.bb-closer-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: center; }
+.bb-benefits li { position: relative; padding-left: 30px; margin-top: 12px; font-size: 17px; }
+.bb-benefits li::before { content: "\2713"; position: absolute; left: 0; color: var(--bb-gold); font-weight: 800; }
+.bb-book { background: var(--bb-navy-light); border: 1px solid var(--bb-gold); border-radius: 14px; padding: 32px; box-shadow: 0 20px 50px rgba(0,0,0,.35); }
+.bb-book h3 { font-size: 22px; margin-bottom: 14px; }
+.bb-book li { position: relative; padding-left: 26px; margin-top: 10px; font-size: 15px; }
+.bb-book li::before { content: "\2192"; position: absolute; left: 0; color: var(--bb-gold); }
+.bb-book .bb-btn { display: block; text-align: center; margin-top: 26px; }
+.bb-book .bb-fud { justify-content: center; margin-top: 16px; }
+
+/* Footer */
+.bb-footer { background: var(--bb-navy); padding: 30px 24px; text-align: center; font-size: 13px; color: var(--bb-gray-400); border-top: 1px solid var(--bb-navy-light); }
+
+@media (max-width: 900px) {
+  .bb-section { padding: 60px 0; }
+  .bb-hero-grid, .bb-closer-grid { grid-template-columns: 1fr; gap: 36px; }
+  .bb-vp-grid { grid-template-columns: 1fr; }
+  .bb-steps { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px) {
+  .bb-steps { grid-template-columns: 1fr; }
+  .bb-ba { grid-template-columns: 1fr; }
+  .bb-btn { width: 100%; text-align: center; }
+  .bb-nav .bb-btn { width: auto; }
+}
+
+/* Theme-aware components: every block adapts to the background it lands on */
+.bb-dark .bb-step, .bb-dark-alt .bb-step { background: var(--bb-navy-light); border-color: rgba(255,255,255,.08); color: var(--bb-body-dark); }
+.bb-wrap .bb-dark .bb-step h3, .bb-wrap .bb-dark-alt .bb-step h3 { color: var(--bb-white); }
+.bb-dark .bb-step::before, .bb-dark-alt .bb-step::before { background: var(--bb-navy-mid); }
+
+.bb-light .bb-vp { background: var(--bb-white); border-color: var(--bb-line-light); }
+.bb-light .bb-vp p { color: var(--bb-body-light); }
+.bb-light .bb-vp-label { color: #A9781F; }
+
+.bb-light .bb-faq details { border-bottom-color: var(--bb-line-light); }
+.bb-light .bb-faq summary { color: var(--bb-navy-light); }
+.bb-light .bb-faq summary::after { color: #A9781F; }
+
+.bb-dark-alt .bb-letter .bb-dear, .bb-dark-alt .bb-letter .bb-cost, .bb-dark .bb-letter .bb-dear, .bb-dark .bb-letter .bb-cost { color: var(--bb-white); }
+.bb-dark-alt .bb-cross li::before, .bb-dark .bb-cross li::before { background: #5A2E33; color: #F3C9CD; }
+
+/* Friction line inside the booking card keeps the check style */
+.bb-book .bb-fud li { padding-left: 0; margin-top: 0; font-size: 14px; }
+.bb-book .bb-fud li::before { content: "\2713"; position: static; margin-right: 8px; color: var(--bb-gold); }
+
+/* Credential badges: each sits on a white tile so any badge artwork reads on light or dark sections */
+.bb-badges { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 16px 20px; margin: 4px 0 36px; }
+.bb-badges-hero { justify-content: flex-start; margin: 22px 0 0; }
+.bb-badge { background: #FFFFFF; border-radius: 10px; padding: 8px 14px; display: inline-flex; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,.12); }
+.bb-badge img { height: 52px; width: auto; max-width: 180px; display: block; }
+.bb-badges-hero .bb-badge img { height: 42px; }
+
+/* Founder headshot in the booking card: puts a face on "you talk directly to the person who builds it" */
+.bb-who { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+.bb-headshot { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; border: 2px solid var(--bb-gold); flex: none; }
+.bb-who b { display: block; color: var(--bb-white); font-size: 17px; }
+.bb-who span { font-size: 14px; color: var(--bb-gray-300); }
+.bb-nav > a img, .bb-nav img { height: 46px !important; max-height: 46px !important; width: auto !important; background: #fff; border-radius: 8px; padding: 4px 12px; }
+</style></head><body style="margin:0"><div class="bb-wrap"><div class="bb-dark"><nav class="bb-nav"><div class="bb-mark"><img src="assets/logo-logo-nav.png" alt="Blueribbon Analytics"></div><a class="bb-btn bb-btn-sm" href="https://tidycal.com/royce/30-minute-meeting">Book a free call</a></nav></div><header class="bb-section bb-hero bb-dark"><div class="bb-inner"><div class="bb-hero-grid"><div><p class="bb-eyebrow">Power BI reporting systems for restoration and cleaning companies</p><h1>Know What Every Job Earns and Who Still Owes You, Without Waiting for the Month-End Close</h1><p class="bb-sub">Tired of stitching job files and insurance payments together every month? I connect your job software and accounting into a reporting system that refreshes itself, so profit by job and money owed are clear within 30 days.</p><div class="bb-cta-row"><a class="bb-btn" href="https://tidycal.com/royce/30-minute-meeting">Get a Free Look at Your Data</a></div><ul class="bb-fud"><li>Free call, no obligation</li><li>Works with the software you already use</li><li>You talk directly to the person who builds it</li></ul><div class="bb-proof-row"><span class="bb-chip">450+ reporting systems built</span><span class="bb-chip">Microsoft Certified Power BI Data Analyst</span></div><div class="bb-badges bb-badges-hero"><span class="bb-badge"><img src="assets/badge1-badge-microsoft.png" alt="Credential badge"></span><span class="bb-badge"><img src="assets/badge2-badge-fmva.png" alt="Credential badge"></span></div></div><div class="bb-single-visual"><img src="assets/cleanusa-sales-performance.png" alt="Live reporting system built for CleanUSA, a cleaning and restoration company, showing calls, won jobs, estimates, invoiced and collected amounts against targets"></div></div></div></header><section class="bb-section bb-light"><div class="bb-inner bb-center"><h2>Join the business owners who stopped rebuilding reports by hand and started seeing what each job earns</h2><div class="bb-stats"><div class="bb-stat"><b>450+</b><span>reporting systems built</span></div><div class="bb-stat"><b>Top Rated</b><span>seller on Fiverr</span></div><div class="bb-stat"><b>11 years</b><span>in finance and operations before consulting</span></div></div><div class="bb-embed"><div class="famewall-embed" data-src="blueribbonanalytics" data-format="carousel" data-autoplay="1" style="width:100%;display:block!important;"></div><script type="text/javascript" src="https://embed.famewall.io/newFrame.js" defer></script></div></div></section><section class="bb-section bb-dark-alt"><div class="bb-inner"><h2 class="bb-center">What changes when your job data reports for itself</h2><div class="bb-vp-grid"><div class="bb-vp"><div class="bb-vp-label">Profit by job</div><h3>See which jobs and service lines make money while you can still change your next quote</h3><p>Revenue and costs line up on every job as files close out.</p></div><div class="bb-vp"><div class="bb-vp-label">Money owed</div><h3>Know exactly which invoices are waiting and who is holding your cash, without asking the office</h3><p>Open invoices show up by age, so the slow payers stand out.</p></div><div class="bb-vp"><div class="bb-vp-label">Lead sources</div><h3>Find out which referral partners and marketing channels bring in paid work, then spend your time there</h3><p>Jobs and revenue trace back to where the call came from, wherever your software records it.</p></div><div class="bb-vp"><div class="bb-vp-label">Crew clarity</div><h3>Know how busy every technician and crew really is before you hire or turn work away</h3><p>Job counts and hours update as work gets closed out.</p></div><div class="bb-vp"><div class="bb-vp-label">Automatic refresh</div><h3>Start each Monday with numbers that already updated themselves and skip the exports</h3><p>Your job software and accounting feed the reporting system directly.</p></div><div class="bb-vp"><div class="bb-vp-label">Agreed numbers</div><h3>Settle what job profit and cycle time mean before I build, and stop debating whose number is right</h3><p>You and your team sign off on the definitions first.</p></div><div class="bb-vp"><div class="bb-vp-label">Direct access</div><h3>Work with the person who builds your reporting system, backed by 11 years in finance and operations</h3><p>One point of contact from first call to handoff.</p></div></div></div></section><section class="bb-section bb-light"><div class="bb-inner"><h2 class="bb-center">Go from scattered job files to one live reporting system in four simple steps</h2><div class="bb-steps"><div class="bb-step"><h3>Tell me what you need to see</h3><p>A free 30-minute call on the decisions you make each week and where your job and payment data lives today.</p></div><div class="bb-step"><h3>I move your data into one secure home and lock in your numbers</h3><p>I move your data from your job software and accounting into a cloud data warehouse, Google BigQuery or Microsoft Fabric, so it lives in one place you own. You sign off on what each number means before anything is built.</p></div><div class="bb-step"><h3>I build your reporting system</h3><p>Job profit and open invoices get built once and refresh on their own from your warehouse.</p></div><div class="bb-step"><h3>Your team gets answers in seconds</h3><p>A short walkthrough at handoff so everyone knows where to look.</p></div></div></div></section><section class="bb-section bb-dark-alt"><div class="bb-inner"><h2 class="bb-center">Questions before you book</h2><div class="bb-faq"><details><summary>How long does it take?</summary><p>Most projects go live within 30 days of kickoff. The exact timing depends on how many sources I connect.</p></details><details><summary>Which restoration software can you connect to?</summary><p>Most job management and accounting platforms that offer an export or a connection. Tell me what you run on the call and I will confirm before you spend anything.</p></details><details><summary>Have you worked with restoration or cleaning companies before?</summary><p>Yes. The reporting system at the top of this page was built for CleanUSA, a cleaning and restoration company, and I have delivered 450+ across many industries. I can walk you through it on the call.</p></details><details><summary>Do I need to buy anything extra?</summary><p>Viewing the reporting system may need Microsoft licenses, and the cloud data warehouse may carry a small hosting cost, depending on your setup. I lay out the exact numbers on the call so there are no surprises.</p></details><details><summary>What does it cost?</summary><p>It depends on how many sources I connect and how the reporting system is delivered. You get a fixed quote after the call, with milestone-based payments.</p></details><details><summary>Who owns the reporting system and the data?</summary><p>You do. The reporting system, the data warehouse and all of your data belong to you from day one.</p></details><details><summary>What happens after it goes live?</summary><p>For 7 days after handover I fix anything that breaks and was part of the build, at no extra cost. After that, an optional maintenance plan keeps everything running and up to date. I quote it upfront so there are no surprises.</p></details></div></div></section><section class="bb-section bb-dark" id="book"><div class="bb-inner"><div class="bb-closer-grid"><div><h2>Book a free call and see what your live reporting system could look like.</h2><ul class="bb-benefits"><li>Profit by job and service line in one place</li><li>Open invoices and slow payers in plain view</li><li>Numbers that refresh on their own</li><li>One version of the truth for you and your team</li></ul></div><div class="bb-book"><div class="bb-who"><img class="bb-headshot" src="assets/headshot-royce-mekolle-profile.jpg" alt="Royce Mekolle"><div><b>Royce Mekolle</b><span>Founder, Blueribbon Analytics</span></div></div><h3>On the call, you will get</h3><ul><li>A clear picture of which reports to automate first</li><li>An honest view of what your job data can support</li><li>A fixed quote if it is a fit</li></ul><a class="bb-btn" href="https://tidycal.com/royce/30-minute-meeting">Get a Free Look at Your Data</a><ul class="bb-fud"><li>Free call, no obligation</li><li>Works with the software you already use</li><li>You talk directly to the person who builds it</li></ul></div></div></div></section><footer class="bb-footer">Blueribbon Analytics. Reporting systems for growing businesses.</footer></div></body></html>
