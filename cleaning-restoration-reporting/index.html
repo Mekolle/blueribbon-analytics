@@ -466,7 +466,9 @@
 .crl-fud li{ font-size:0.85rem; color:rgba(247,243,234,0.65); padding-left:1.3rem; position:relative; }
 .crl-fud li::before{ content:'\2713'; position:absolute; left:0; color:var(--rust-soft); font-weight:700; }
 .crl-fud-center{ align-items:center; }
-.crl-fud-center li{ padding-left:1.3rem; text-align:left; }
+.crl-fud-center li{ padding-left:1.3rem; text-align:left; color:var(--ink-soft); }
+.crl-fud-center li::before{ color:var(--rust); }
+.crl-nav .btn-solid:hover{ background:var(--blue); }
 .crl-proof-row{ margin-bottom:1rem; }
 .crl-chip{ display:inline-block; font-size:0.68rem; letter-spacing:0.04em; text-transform:uppercase; color:var(--rust-soft); border:1px solid rgba(227,179,146,0.35); background:rgba(227,179,146,0.08); padding:0.4rem 0.8rem; border-radius:100px; }
 .crl-badges{ display:flex; align-items:center; gap:1rem; }
@@ -491,6 +493,8 @@
 .crl-try-note{ margin-top:1.2rem; font-size:0.68rem; letter-spacing:0.04em; text-transform:uppercase; color:rgba(247,243,234,0.45); }
 
 .crl-vp-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:2rem 2.2rem; margin-top:2.2rem; }
+.crl-vp-icon{ width:2.2rem; height:2.2rem; border-radius:50%; background:rgba(227,179,146,0.12); border:1px solid rgba(227,179,146,0.3); display:flex; align-items:center; justify-content:center; margin-bottom:0.9rem; }
+.crl-vp-icon svg{ width:18px; height:18px; color:var(--rust-soft); }
 .crl-vp-label{ font-size:0.68rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--rust-soft); margin-bottom:0.6rem; }
 .crl-vp h3{ font-family:'Instrument Serif', serif; font-size:1.3rem; line-height:1.32; color:var(--paper); margin-bottom:0.6rem; }
 .crl-vp p{ font-size:0.9rem; line-height:1.55; color:rgba(247,243,234,0.65); }
@@ -601,12 +605,12 @@
   <div class="crl-inner">
     <h2 class="crl-center" data-reveal>What changes when your job data reports for itself</h2>
     <div class="crl-vp-grid">
-      <div class="crl-vp" data-reveal><div class="crl-vp-label mono">Profit by job</div><h3>See which jobs and service lines make money while you can still change your next quote</h3><p>Revenue and costs line up on every job as files close out.</p></div>
-      <div class="crl-vp" data-reveal><div class="crl-vp-label mono">Money owed</div><h3>Know exactly which invoices are waiting and who is holding your cash, without asking the office</h3><p>Open invoices show up by age, so the slow payers stand out.</p></div>
-      <div class="crl-vp" data-reveal><div class="crl-vp-label mono">Lead sources</div><h3>Find out which referral partners and marketing channels bring in paid work, then spend your time there</h3><p>Jobs and revenue trace back to where the call came from, wherever your software records it.</p></div>
-      <div class="crl-vp" data-reveal><div class="crl-vp-label mono">Automatic refresh</div><h3>Start each Monday with numbers that already updated themselves and skip the exports</h3><p>Your job software and accounting feed the reporting system directly.</p></div>
-      <div class="crl-vp" data-reveal><div class="crl-vp-label mono">Agreed numbers</div><h3>Settle what job profit and cycle time mean before I build, and stop debating whose number is right</h3><p>You and your team sign off on the definitions first.</p></div>
-      <div class="crl-vp" data-reveal><div class="crl-vp-label mono">Direct access</div><h3>Work with the person who builds your reporting system, backed by 11 years in finance and operations</h3><p>One point of contact from first call to handoff.</p></div>
+      <div class="crl-vp" data-reveal><div class="crl-vp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div class="crl-vp-label mono">Profit by job</div><h3>See which jobs and service lines make money while you can still change your next quote</h3><p>Revenue and costs line up on every job as files close out.</p></div>
+      <div class="crl-vp" data-reveal><div class="crl-vp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg></div><div class="crl-vp-label mono">Money owed</div><h3>Know exactly which invoices are waiting and who is holding your cash, without asking the office</h3><p>Open invoices show up by age, so the slow payers stand out.</p></div>
+      <div class="crl-vp" data-reveal><div class="crl-vp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h18l-7 9v6l-4 2v-8L3 4z"/></svg></div><div class="crl-vp-label mono">Lead sources</div><h3>Find out which referral partners and marketing channels bring in paid work, then spend your time there</h3><p>Jobs and revenue trace back to where the call came from, wherever your software records it.</p></div>
+      <div class="crl-vp" data-reveal><div class="crl-vp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></svg></div><div class="crl-vp-label mono">Automatic refresh</div><h3>Start each Monday with numbers that already updated themselves and skip the exports</h3><p>Your job software and accounting feed the reporting system directly.</p></div>
+      <div class="crl-vp" data-reveal><div class="crl-vp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h11"/></svg></div><div class="crl-vp-label mono">Agreed numbers</div><h3>Settle what job profit and cycle time mean before I build, and stop debating whose number is right</h3><p>You and your team sign off on the definitions first.</p></div>
+      <div class="crl-vp" data-reveal><div class="crl-vp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg></div><div class="crl-vp-label mono">Direct access</div><h3>Work with the person who builds your reporting system, backed by 11 years in finance and operations</h3><p>One point of contact from first call to handoff.</p></div>
     </div>
   </div>
 </section>
