@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sales Visibility Reporting System | Blueribbon Analytics</title>
+<meta name="description" content="See exactly where leads are falling out, which agents are converting, and what is driving revenue, in 30 days, without pulling a single report manually.">
+<link rel="canonical" href="https://blueribbonanalytics.com/salesvisibilitysystem/">
+<meta name="robots" content="index, follow">
+<link rel="icon" type="image/png" href="../images/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;600;700&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F7F3EA;
+    --paper-2:#EFE8D8;
+    --paper-3:#E7DEC9;
+    --ink:#17160F;
+    --ink-soft:#5C5847;
+    --ink-faint:#8C8672;
+    --line:#DBD1B8;
+    --line-strong:#C7BB9C;
+    --blue:#1E4FD6;
+    --blue-deep:#12379E;
+    --rust:#B8542C;
+    --rust-soft:#E3B392;
+    --cream-card:#FFFDF8;
+    --dark:#151309;
+    --dark-2:#1E1B10;
+    --radius-md:4px;
+    --radius-lg:6px;
+    --maxw:1240px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  body{
+    margin:0;
+    font-family:'Space Grotesk', sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    font-size:16.5px;
+  }
+  h1,h2,h3,h4{
+    font-family:'Instrument Serif', serif;
+    margin:0;
+    font-weight:400;
+    letter-spacing:-0.01em;
+  }
+  p{margin:0;}
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  ul{list-style:none;margin:0;padding:0;}
+  button{font-family:inherit; background:none; border:none; cursor:pointer;}
+  section{padding:7rem 0;}
+  .wrap{width:min(var(--maxw), 92%); margin:0 auto;}
+  .mono{font-family:'Space Mono', monospace;}
+
+  .skip-link{
+    position:absolute; left:-999px; top:auto;
+    background:var(--rust); color:var(--paper);
+    padding:0.9rem 1.4rem; z-index:300; font-weight:700;
+  }
+  .skip-link:focus{left:0; top:0;}
+  a:focus-visible, button:focus-visible, summary:focus-visible{
+    outline:3px solid var(--rust); outline-offset:3px;
+  }
+
+  /* progress bar */
+  #scroll-progress{
+    position:fixed; top:0; left:0; height:3px; background:linear-gradient(90deg, var(--blue), var(--rust));
+    width:0%; z-index:400; transition:width 0.1s linear;
+  }
+
+  /* ---------- BUTTONS ---------- */
+  .btn{
+    display:inline-flex; align-items:center; gap:0.6rem;
+    padding:1rem 1.9rem;
+    font-weight:600; font-size:0.95rem;
+    border-radius:2px;
+    transition:transform 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+  .btn-solid{background:var(--ink); color:var(--paper);}
+  .btn-solid:hover{background:var(--rust); transform:translateY(-2px);}
+  .btn-line{border:1.5px solid var(--ink); color:var(--ink);}
+  .btn-line:hover{border-color:var(--rust); color:var(--rust);}
+  .btn-text{gap:0.4rem; font-weight:600; border-bottom:1.5px solid var(--ink); padding:0.2rem 0 0.1rem; border-radius:0;}
+  .btn-text:hover{border-color:var(--rust); color:var(--rust);}
+  .btn-text svg{width:14px; height:14px; transition:transform 0.2s ease;}
+  .btn-text:hover svg{transform:translate(3px,-3px);}
+  .btn-text-light{color:var(--paper); border-bottom:1.5px solid rgba(247,243,234,0.5);}
+  .btn-text-light:hover{color:var(--rust-soft); border-color:var(--rust-soft);}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed; inset:0 0 auto 0; z-index:200;
+    padding:1.3rem 0;
+    transition:background 0.3s ease, padding 0.3s ease, border-color 0.3s ease;
+    border-bottom:1px solid transparent;
+  }
+  header.scrolled{
+    background:rgba(247,243,234,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom-color:var(--line);
+    padding:0.9rem 0;
+  }
+  nav{display:flex; align-items:center; justify-content:space-between; gap:1.5rem;}
+  .brand{display:flex; align-items:center; gap:0.7rem;}
+  .brand img{height:60px; width:60px; border-radius:8px;}
+  .brand-name{font-family:'Instrument Serif', serif; font-size:1.55rem; color:var(--ink); white-space:nowrap;}
+  .nav-links{display:flex; align-items:center; gap:2.1rem;}
+  .nav-links a{font-size:0.85rem; font-weight:600; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-soft); position:relative;}
+  .nav-links a:hover{color:var(--ink);}
+  .nav-links a.btn-solid{color:var(--paper);}
+  .nav-links a.btn-solid:hover{background:var(--blue); color:var(--paper);}
+  .nav-toggle{display:none; color:var(--ink); padding:0.4rem;}
+  .nav-toggle svg{width:24px; height:24px;}
+
+  /* ---------- HERO ---------- */
+  .hero{padding:9.5rem 0 5rem; position:relative; overflow:hidden;}
+  .hero .wrap{display:grid; grid-template-columns:1.15fr 0.85fr; gap:4rem; align-items:center;}
+  .hero-eyebrow{
+    display:inline-flex; align-items:center; gap:0.6rem;
+    font-size:0.76rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--rust); margin-bottom:1.6rem;
+  }
+  .hero-eyebrow::before{content:'◆'; font-size:0.6rem;}
+  .hero h1{
+    font-size:clamp(2.6rem, 5.2vw, 4.4rem);
+    line-height:1.04;
+    color:var(--ink);
+    margin-bottom:1.6rem;
+  }
+  .hero h1 i{font-style:italic; color:var(--blue);}
+  .hero .lead{
+    font-size:1.32rem; line-height:1.55; color:var(--ink-soft); max-width:33rem; margin-bottom:2.3rem;
+  }
+  .hero-actions{display:flex; flex-wrap:wrap; align-items:center; gap:1.6rem; margin-bottom:2.4rem;}
+  .hero-note{font-size:0.92rem; color:var(--ink-faint); max-width:27rem; margin-bottom:1.8rem;}
+  .hero-tags{display:flex; flex-wrap:wrap; align-items:center; gap:0.7rem;}
+  .hero-tags span{
+    font-family:'Space Mono', monospace;
+    font-size:0.72rem; color:var(--ink-soft);
+    border:1px solid var(--line-strong); padding:0.4rem 0.7rem; border-radius:2px;
+  }
+  .hero-badge-icon{
+    display:inline-flex; align-items:center; gap:0.5rem;
+    font-family:'Space Mono', monospace; font-size:0.72rem; color:var(--ink-soft);
+    border:1px solid var(--line-strong); padding:0.3rem 0.8rem 0.3rem 0.3rem; border-radius:100px;
+    background:var(--cream-card);
+  }
+  .hero-badge-icon img{height:26px; width:26px; border-radius:50%; object-fit:cover; flex-shrink:0;}
+
+  /* Hero flow visual */
+  .flow-visual{position:relative; display:flex; flex-direction:column; align-items:stretch; gap:0;}
+  .flow-source{
+    display:flex; align-items:center; gap:0.8rem;
+    background:var(--cream-card); border:1px solid var(--line);
+    border-radius:var(--radius-md); padding:0.75rem 1rem;
+    font-size:0.86rem; font-weight:600; color:var(--ink-soft);
+    box-shadow:0 8px 20px -14px rgba(23,22,15,0.15);
+  }
+  .flow-source svg{width:18px; height:18px; color:var(--blue); flex-shrink:0;}
+  .flow-connector{
+    width:1.5px; height:24px; background:repeating-linear-gradient(to bottom, var(--line-strong) 0 4px, transparent 4px 8px);
+    margin-left:1.35rem;
+  }
+  .flow-result{
+    margin-top:0.6rem;
+    background:linear-gradient(165deg, #201D12 0%, var(--ink) 55%, #0F0E09 100%);
+    color:var(--paper);
+    border-radius:12px;
+    padding:0;
+    box-shadow:0 40px 80px -32px rgba(23,22,15,0.55), 0 1px 0 rgba(255,255,255,0.06) inset;
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(247,243,234,0.08);
+  }
+  .flow-result::before{
+    content:'';
+    position:absolute; inset:0;
+    background:radial-gradient(circle at 85% -10%, rgba(62,130,250,0.28), transparent 55%);
+    pointer-events:none;
+  }
+  .flow-result-chrome{
+    display:flex; align-items:center; gap:0.4rem;
+    padding:0.85rem 1.3rem;
+    border-bottom:1px solid rgba(247,243,234,0.08);
+    position:relative;
+  }
+  .flow-result-chrome span{width:7px; height:7px; border-radius:50%; background:rgba(247,243,234,0.16);}
+  .flow-result-chrome .rc-title{
+    margin-left:auto; font-family:'Space Mono',monospace; font-size:0.66rem; letter-spacing:0.05em;
+    color:rgba(247,243,234,0.4); text-transform:uppercase;
+  }
+  .flow-result-body{padding:1.7rem 1.8rem 1.9rem; position:relative;}
+  .flow-result-label{
+    font-family:'Space Mono', monospace; font-size:0.68rem; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--rust-soft); margin-bottom:1rem; display:flex; align-items:center; gap:0.5rem;
+  }
+  .flow-result-label .dot{width:6px; height:6px; border-radius:50%; background:#7CD98A; box-shadow:0 0 10px #7CD98A; animation:pulse 2s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.25;}}
+  .flow-result-num{font-family:'Instrument Serif', serif; font-style:italic; font-size:3.4rem; margin-bottom:0.3rem; letter-spacing:-0.01em;}
+  .flow-result-sub{font-size:0.9rem; color:rgba(247,243,234,0.6); margin-bottom:1.5rem;}
+  .flow-spark{display:flex; align-items:flex-end; gap:5px; height:44px; margin-bottom:0.3rem;}
+  .flow-spark div{flex:1; background:linear-gradient(180deg, #5B9BFF, #1E4FD6); border-radius:3px 3px 1px 1px; height:var(--h); box-shadow:0 4px 12px -4px rgba(30,79,214,0.6);}
+  .flow-spark-labels{display:flex; justify-content:space-between; font-family:'Space Mono',monospace; font-size:0.62rem; color:rgba(247,243,234,0.35); margin-top:0.5rem;}
+
+  /* ---------- MARQUEE STRIP ---------- */
+  .marquee-strip{background:var(--dark); color:var(--paper); overflow:hidden; padding:1.6rem 0; border-top:1px solid rgba(247,243,234,0.1); border-bottom:1px solid rgba(247,243,234,0.1);}
+  .marquee-track{display:flex; width:max-content; animation:marquee 32s linear infinite;}
+  .marquee-track span{
+    display:inline-flex; align-items:center; gap:1rem;
+    font-family:'Space Mono', monospace; font-size:0.92rem; font-weight:400;
+    padding:0 2.2rem; white-space:nowrap; color:rgba(247,243,234,0.85);
+  }
+  .marquee-track span b{color:var(--rust-soft); font-weight:700;}
+  .marquee-track span::after{content:'◆'; color:rgba(247,243,234,0.25); margin-left:2.2rem; font-size:0.6rem;}
+  @keyframes marquee{from{transform:translateX(0);} to{transform:translateX(-50%);}}
+
+  /* ---------- SECTION HEADS ---------- */
+  .head-row{display:flex; justify-content:space-between; align-items:flex-end; gap:2rem; margin-bottom:3.6rem; flex-wrap:wrap;}
+  .kicker{
+    display:flex; align-items:center; gap:0.6rem;
+    font-family:'Space Mono', monospace; font-size:0.74rem; letter-spacing:0.05em; text-transform:uppercase;
+    color:var(--rust); margin-bottom:1rem;
+  }
+  .kicker::before{content:''; width:26px; height:1.5px; background:var(--rust);}
+  .head-row h2{font-size:clamp(1.9rem, 3.2vw, 2.7rem); max-width:34rem;}
+  .head-row p{max-width:25rem; color:var(--ink-soft); font-size:1.15rem; line-height:1.55;}
+
+  /* ---------- HOW IT WORKS: TIMELINE ---------- */
+  #how{background:var(--paper);}
+  .timeline{position:relative; padding-left:0;}
+  .timeline-rail{position:absolute; left:2.15rem; top:0.4rem; bottom:0.4rem; width:2px; background:var(--line);}
+  .timeline-rail-fill{position:absolute; left:0; top:0; width:100%; height:0%; background:var(--rust); transition:height 0.15s ease-out;}
+  .timeline-item{position:relative; display:grid; grid-template-columns:4.3rem 1fr; gap:1.5rem; padding-bottom:3.2rem;}
+  .timeline-item:last-child{padding-bottom:0;}
+  .timeline-num{
+    font-family:'Instrument Serif', serif; font-size:1.7rem; color:var(--paper);
+    background:var(--ink); width:4.3rem; height:4.3rem; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; position:relative; z-index:2;
+    flex-shrink:0;
+  }
+  .timeline-body h3{font-size:1.55rem; margin-bottom:0.6rem;}
+  .timeline-body p{color:var(--ink-soft); font-size:1rem; max-width:36rem;}
+
+  /* ---------- BENEFITS: EDITORIAL LIST ---------- */
+  .benefits-section{background:var(--paper-2);}
+  .benefit-row{
+    display:grid; grid-template-columns:5rem 1fr 1fr; gap:2rem; align-items:center;
+    padding:1.8rem 0; border-bottom:1px solid var(--line-strong);
+  }
+  .benefit-row:first-of-type{border-top:1px solid var(--line-strong);}
+  .benefit-index{font-family:'Instrument Serif', serif; font-style:italic; font-size:1.6rem; color:var(--rust);}
+  .benefit-row h3{font-size:1.35rem;}
+  .benefit-row p{color:var(--ink-soft); font-size:0.98rem;}
+
+  /* ---------- SERVICES: ACCORDION ---------- */
+  #services{background:var(--paper);}
+  .vert-accordion{border-top:1px solid var(--line-strong);}
+  .vert-item{border-bottom:1px solid var(--line-strong);}
+  .vert-item summary{
+    list-style:none; cursor:pointer;
+    display:flex; align-items:center; gap:1.4rem;
+    padding:1.7rem 0;
+  }
+  .vert-item summary::-webkit-details-marker{display:none;}
+  .vert-num{font-family:'Space Mono',monospace; color:var(--ink-faint); font-size:0.95rem; width:2.2rem; flex-shrink:0;}
+  .vert-name{font-family:'Instrument Serif', serif; font-size:1.5rem; flex:1;}
+  .vert-plus{width:28px; height:28px; border:1px solid var(--line-strong); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; position:relative;}
+  .vert-plus::before, .vert-plus::after{content:''; position:absolute; background:var(--ink);}
+  .vert-plus::before{width:11px; height:1.4px;}
+  .vert-plus::after{width:1.4px; height:11px; transition:transform 0.2s ease;}
+  .vert-item[open] .vert-plus::after{transform:rotate(90deg); opacity:0;}
+  .vert-content{padding:0 0 2.2rem 3.6rem; display:grid; grid-template-columns:1.1fr 1fr; gap:2rem;}
+  .vert-problem{color:var(--ink-soft); font-size:0.98rem;}
+  .vert-problem strong{color:var(--ink); display:block; font-family:'Space Mono',monospace; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.6rem;}
+  .vert-outcomes li{position:relative; padding-left:1.2rem; font-size:0.94rem; margin-bottom:0.55rem; color:var(--ink);}
+  .vert-outcomes li::before{content:'—'; position:absolute; left:0; color:var(--rust);}
+  .verticals-note{margin-top:2.2rem; font-size:0.96rem; color:var(--ink-soft);}
+  .verticals-note a{color:var(--blue); font-weight:600; border-bottom:1px solid var(--blue);}
+
+  /* ---------- PORTFOLIO: SCROLL CAROUSEL ---------- */
+  .live-demo{background:var(--dark); color:var(--paper);}
+  .live-demo .kicker{color:var(--rust-soft);}
+  .live-demo .kicker::before{background:var(--rust-soft);}
+  .live-demo .head-row p{color:rgba(247,243,234,0.6);}
+  .carousel-controls{display:flex; gap:0.6rem;}
+  .carousel-btn{
+    width:46px; height:46px; border-radius:50%; border:1px solid rgba(247,243,234,0.25);
+    display:flex; align-items:center; justify-content:center; color:var(--paper);
+    transition:border-color 0.2s ease, background 0.2s ease;
+  }
+  .carousel-btn:hover{border-color:var(--rust-soft); background:rgba(247,243,234,0.06);}
+  .carousel-btn svg{width:18px; height:18px;}
+  .carousel-track{
+    display:flex; gap:1.6rem; overflow-x:auto; scroll-snap-type:x mandatory;
+    padding-bottom:1rem; margin:0 -1px;
+    scrollbar-width:none;
+  }
+  .carousel-track::-webkit-scrollbar{display:none;}
+  .case-card{
+    scroll-snap-align:start;
+    flex:0 0 min(560px, 86vw);
+    background:var(--dark-2);
+    border:1px solid rgba(247,243,234,0.1);
+    border-radius:var(--radius-lg);
+    padding:2.2rem;
+    position:relative;
+    overflow:hidden;
+  }
+  .case-ghost-num{
+    position:absolute; top:-1.2rem; right:0.6rem;
+    font-family:'Instrument Serif', serif; font-size:8rem; color:rgba(247,243,234,0.04);
+    line-height:1; pointer-events:none;
+  }
+  .case-tag{
+    font-family:'Space Mono', monospace; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.05em;
+    color:var(--rust-soft); margin-bottom:1rem; display:block; position:relative;
+  }
+  .case-card h3{font-size:1.5rem; margin-bottom:1rem; position:relative; max-width:22rem;}
+  .case-card p{color:rgba(247,243,234,0.72); font-size:0.96rem; margin-bottom:1.2rem; position:relative;}
+  .case-note{font-size:0.8rem; color:var(--rust-soft); font-style:italic; margin-bottom:1.1rem; display:block; position:relative;}
+  .img-placeholder{
+    position:relative; aspect-ratio:16/10; border-radius:var(--radius-md);
+    border:1px dashed rgba(247,243,234,0.25);
+    background:repeating-linear-gradient(135deg, rgba(247,243,234,0.03) 0 12px, transparent 12px 24px);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:0.6rem; text-align:center; padding:1.3rem; margin-bottom:1.2rem;
+  }
+  .img-placeholder svg{width:28px; height:28px; color:rgba(247,243,234,0.3);}
+  .img-placeholder .ph-label{font-size:0.78rem; font-weight:600; color:rgba(247,243,234,0.6);}
+  .img-placeholder .ph-note{font-size:0.7rem; color:rgba(247,243,234,0.35);}
+  .img-placeholder.light{
+    border-color:var(--line-strong);
+    background:repeating-linear-gradient(135deg, rgba(23,22,15,0.04) 0 12px, transparent 12px 24px);
+  }
+  .img-placeholder.light svg{color:var(--ink-faint);}
+  .img-placeholder.light .ph-label{color:var(--ink-soft);}
+  .img-placeholder.light .ph-note{color:var(--ink-faint);}
+  .case-image{
+    position:relative; aspect-ratio:16/10; border-radius:var(--radius-md);
+    overflow:hidden; margin-bottom:1.2rem; border:1px solid rgba(247,243,234,0.12);
+  }
+  .case-image img{width:100%; height:100%; object-fit:cover; object-position:top;display:block;}
+  .showcase-link{
+    display:inline-flex; align-items:center; gap:0.4rem; color:var(--paper); font-weight:600; font-size:0.9rem;
+    border-bottom:1.5px solid var(--rust-soft); padding-bottom:0.1rem; position:relative;
+  }
+  .showcase-link:hover{color:var(--rust-soft);}
+  .showcase-link svg{width:13px; height:13px;}
+  .portfolio-footnote{margin-top:2.2rem; color:rgba(247,243,234,0.55); font-size:0.94rem; max-width:38rem;}
+
+  /* ---------- TESTIMONIALS ---------- */
+  #testimonials{background:var(--paper); position:relative;}
+  .quote-mark{font-family:'Instrument Serif', serif; font-style:italic; font-size:6rem; color:var(--line-strong); line-height:0.6; margin-bottom:1rem;}
+
+  /* ---------- ABOUT: DOSSIER ---------- */
+  .consultant{background:var(--paper-2);}
+  .consultant .wrap{display:grid; grid-template-columns:0.75fr 1.25fr; gap:4rem; align-items:start;}
+  .dossier-photo{
+    background:var(--cream-card); border:1px solid var(--line-strong); padding:0.9rem 0.9rem 1.4rem;
+    transform:rotate(-1.5deg); box-shadow:0 24px 50px -28px rgba(23,22,15,0.3);
+  }
+  .dossier-photo .img-placeholder{aspect-ratio:4/5; margin-bottom:0.9rem;}
+  .dossier-caption{font-family:'Space Mono', monospace; font-size:0.72rem; color:var(--ink-faint); text-align:center; letter-spacing:0.03em;}
+  .consultant-copy .lede{font-family:'Instrument Serif', serif; font-style:italic; font-size:1.65rem; color:var(--ink); margin-bottom:1.4rem;}
+  .consultant-copy p{color:var(--ink-soft); font-size:1.06rem; margin-bottom:1.1rem;}
+  .credential-tags{display:flex; flex-wrap:wrap; align-items:center; gap:0.7rem; margin:1.6rem 0 1.8rem;}
+  .credential-tags span{
+    font-family:'Space Mono', monospace; font-size:0.76rem; color:var(--ink);
+    border:1px solid var(--line-strong); padding:0.5rem 0.85rem; border-radius:2px;
+  }
+  .credential-badge{
+    display:inline-flex; align-items:center; gap:0.55rem;
+    font-family:'Space Mono', monospace; font-size:0.76rem; color:var(--ink);
+    border:1px solid var(--line-strong); padding:0.4rem 0.95rem 0.4rem 0.4rem; border-radius:100px;
+    background:var(--cream-card);
+  }
+  .credential-badge img{height:34px; width:34px; border-radius:50%; object-fit:cover; flex-shrink:0;}
+
+  /* ---------- FAQ ---------- */
+  .faq-section{background:var(--paper);}
+  .faq-list{max-width:52rem;}
+  .faq-item{display:grid; grid-template-columns:3rem 1fr; gap:1.2rem; border-bottom:1px solid var(--line-strong); padding:1.6rem 0;}
+  .faq-item:first-child{border-top:1px solid var(--line-strong);}
+  .faq-num{font-family:'Space Mono', monospace; color:var(--ink-faint); font-size:0.9rem; padding-top:0.15rem;}
+  .faq-item summary{cursor:pointer; font-weight:600; font-size:1.06rem; list-style:none; display:flex; align-items:center; justify-content:space-between; gap:1rem;}
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary::after{content:'+'; font-size:1.4rem; color:var(--rust); font-weight:400; flex-shrink:0; transition:transform 0.2s ease;}
+  .faq-item[open] summary::after{transform:rotate(45deg);}
+  .faq-item p{margin-top:1rem; color:var(--ink-soft); font-size:0.98rem;}
+
+  /* ---------- FINAL CTA ---------- */
+  .cta-final{background:var(--dark); color:var(--paper); text-align:center; padding:8rem 0;}
+  .cta-final h2{font-size:clamp(2.1rem, 4.6vw, 3.6rem); font-style:italic; max-width:42rem; margin:0 auto 2.2rem; line-height:1.15;}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--dark); color:rgba(247,243,234,0.6); padding:0 0 3rem;}
+  .footer-rule{height:1px; background:rgba(247,243,234,0.12); margin-bottom:3rem;}
+  .footer-top{display:grid; grid-template-columns:1.4fr 0.8fr 0.8fr 1fr; gap:2.5rem; padding-bottom:3rem;}
+  .footer-brand{display:flex; align-items:center; gap:0.7rem; margin-bottom:1rem;}
+  .footer-brand img{height:42px; width:42px; border-radius:8px;}
+  .footer-brand span{font-family:'Instrument Serif', serif; color:var(--paper); font-size:1.4rem;}
+  .footer-desc{font-size:0.9rem; max-width:22rem;}
+  .footer-heading{font-family:'Space Mono',monospace; color:var(--paper); font-size:0.74rem; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:1rem;}
+  .footer-links li{margin-bottom:0.65rem;}
+  .footer-links a{font-size:0.9rem;}
+  .footer-links a:hover{color:var(--rust-soft);}
+  .footer-bottom{display:flex; justify-content:space-between; align-items:center; padding-top:1.8rem; border-top:1px solid rgba(247,243,234,0.12); font-size:0.82rem; flex-wrap:wrap; gap:1rem;}
+
+  /* ---------- REVEAL ---------- */
+  [data-reveal]{opacity:0; transform:translateY(24px); transition:opacity 0.7s ease, transform 0.7s ease;}
+  [data-reveal].in-view{opacity:1; transform:translateY(0);}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 980px){
+    .hero .wrap{grid-template-columns:1fr; gap:3rem;}
+    .hero{padding:8rem 0 3.5rem;}
+    .consultant .wrap{grid-template-columns:1fr;}
+    .dossier-photo{max-width:280px;}
+    .vert-content{grid-template-columns:1fr;}
+    .footer-top{grid-template-columns:1fr 1fr; row-gap:2.5rem;}
+    .benefit-row{grid-template-columns:3.5rem 1fr; row-gap:0.5rem;}
+    .benefit-row p{grid-column:2 / 3;}
+  }
+  @media (max-width: 640px){
+    section{padding:4.5rem 0;}
+    .nav-links{
+      position:fixed; inset:0 0 0 auto; width:min(78vw,320px);
+      background:var(--paper); flex-direction:column; align-items:flex-start;
+      padding:6.5rem 2rem 2rem; gap:1.6rem; transform:translateX(100%);
+      transition:transform 0.3s ease; box-shadow:-20px 0 40px rgba(0,0,0,0.15);
+      border-left:1px solid var(--line);
+    }
+    .nav-links.open{transform:translateX(0);}
+    .nav-toggle{display:block;}
+    .head-row{flex-direction:column; align-items:flex-start;}
+    .timeline-num{width:3.4rem; height:3.4rem; font-size:1.3rem;}
+    .timeline-item{grid-template-columns:3.4rem 1fr; gap:1rem;}
+    .timeline-rail{left:1.7rem;}
+    .vert-content{padding-left:0;}
+    .footer-top{grid-template-columns:1fr;}
+    .case-card{flex-basis:88vw;}
+  }
+
+  /* ---- Sales Visibility Reporting System page ---- */
+  .svrs-nav{background:var(--paper); border-bottom:1px solid var(--line); padding:1.1rem 0;}
+  .svrs-nav .wrap{display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;}
+  .svrs-nav-logo{display:flex; align-items:center; gap:0.6rem;}
+  .svrs-nav-logo img{height:34px; width:34px; border-radius:8px;}
+  .svrs-nav-logo span{font-family:'Instrument Serif', serif; font-size:1.25rem; color:var(--ink);}
+  .svrs-nav-right{display:flex; align-items:center; gap:1rem; flex-wrap:wrap;}
+  .svrs-badge-pill{
+    display:inline-flex; align-items:center; gap:0.4rem;
+    font-family:'Space Mono', monospace; font-size:0.68rem; letter-spacing:0.04em; text-transform:uppercase;
+    color:var(--ink-soft); border:1px solid var(--line-strong); padding:0.35rem 0.7rem; border-radius:100px;
+  }
+  .svrs-badge-pill svg{width:13px; height:13px;}
+
+  .svrs-review-wrap{background:var(--paper); padding:2.6rem 0 0;}
+  .svrs-review-card{
+    max-width:640px; margin:0 auto; background:var(--cream-card); border:1px solid var(--line);
+    border-radius:var(--radius-lg); padding:1.8rem 2rem; box-shadow:0 30px 60px -30px rgba(23,22,15,0.2);
+  }
+  .svrs-review-quote{font-family:'Instrument Serif', serif; font-size:2.4rem; color:var(--blue); line-height:1; margin-bottom:0.4rem;}
+  .svrs-review-text{font-size:1rem; color:var(--ink-soft); line-height:1.6; margin-bottom:1.2rem;}
+  .svrs-review-divider{height:1px; background:var(--line); margin-bottom:1.1rem;}
+  .svrs-reviewer{display:flex; align-items:center; gap:0.9rem; flex-wrap:wrap;}
+  .svrs-reviewer-avatar{
+    width:40px; height:40px; border-radius:50%; background:var(--ink); color:var(--paper);
+    display:flex; align-items:center; justify-content:center; font-family:'Space Mono',monospace; font-size:0.8rem; flex-shrink:0;
+  }
+  .svrs-reviewer-name{font-weight:700; font-size:0.92rem; color:var(--ink);}
+  .svrs-reviewer-location{font-size:0.8rem; color:var(--ink-faint);}
+  .svrs-reviewer-stars{color:var(--rust); font-size:0.9rem; margin-left:auto;}
+  .svrs-fiverr-badge{display:flex; align-items:center; gap:0.35rem; font-size:0.78rem; color:var(--ink-soft);}
+  .svrs-fiverr-icon{width:18px; height:18px; border-radius:4px; background:#1DBF73; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.72rem;}
+
+  .svrs-hero{background:var(--paper); padding:2.6rem 0 3.2rem; text-align:center;}
+  .svrs-hero .wrap{max-width:820px;}
+  .svrs-hero-eyebrow{
+    font-family:'Space Mono', monospace; font-size:0.76rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--rust); margin-bottom:1.4rem;
+  }
+  .svrs-hero h1{font-size:clamp(2.1rem, 4vw, 3.1rem); line-height:1.12; color:var(--ink); margin-bottom:1.4rem;}
+  .svrs-hero h1 i{font-style:italic; color:var(--blue);}
+  .svrs-hero-body{font-size:1.15rem; line-height:1.6; color:var(--ink-soft); max-width:44rem; margin:0 auto 1.8rem;}
+  .svrs-checks{display:flex; justify-content:center; flex-wrap:wrap; gap:1.3rem; margin-top:1.3rem;}
+  .svrs-check{display:flex; align-items:center; gap:0.5rem; font-size:0.88rem; color:var(--ink-soft);}
+  .svrs-check-icon{color:#2E8B4F; font-weight:700;}
+
+  .svrs-founder{background:var(--cream-card); padding:4rem 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .svrs-founder .wrap{max-width:700px;}
+  .svrs-founder-badge{
+    font-family:'Space Mono', monospace; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.05em;
+    color:var(--blue-deep); background:rgba(30,79,214,0.08); border:1px solid rgba(30,79,214,0.25);
+    display:inline-block; padding:0.3rem 0.7rem; border-radius:100px; margin-bottom:1.4rem;
+  }
+  .svrs-founder-hook{font-family:'Instrument Serif', serif; font-size:clamp(1.5rem,2.6vw,2rem); line-height:1.3; color:var(--ink); margin-bottom:1.2rem;}
+  .svrs-founder-pain{font-size:1.02rem; color:var(--ink-soft); line-height:1.6; margin-bottom:1.6rem;}
+  .svrs-founder-rule{height:1px; background:var(--line-strong); margin-bottom:1.6rem;}
+  .svrs-founder-card{display:flex; align-items:center; gap:1.1rem; margin-bottom:1.6rem;}
+  .svrs-founder-photo{width:64px; height:64px; border-radius:50%; object-fit:cover; flex-shrink:0;}
+  .svrs-founder-name{font-family:'Instrument Serif', serif; font-size:1.15rem; color:var(--ink);}
+  .svrs-founder-title{font-size:0.88rem; color:var(--ink-soft); margin-bottom:0.3rem;}
+  .svrs-founder-bio{font-size:0.92rem; color:var(--ink-soft);}
+  .svrs-founder-pitch{font-size:1.02rem; color:var(--ink-soft); line-height:1.6; margin-bottom:1.2rem;}
+  .svrs-founder-cta{text-align:center; margin-top:1.8rem;}
+  .svrs-cta-meta{
+    display:flex; justify-content:center; gap:0.6rem; flex-wrap:wrap; margin-top:0.9rem;
+    font-family:'Space Mono',monospace; font-size:0.72rem; color:var(--ink-faint);
+  }
+
+  .svrs-sec{background:var(--paper); padding:4.4rem 0;}
+  .svrs-sec:nth-child(even){background:var(--cream-card);}
+  .svrs-sec-head{max-width:640px; margin:0 auto 2.4rem; text-align:center;}
+  .svrs-sec-head h2{font-size:clamp(1.7rem,2.8vw,2.3rem); color:var(--ink); margin-bottom:0.7rem;}
+  .svrs-sec-head p{color:var(--ink-soft); font-size:1.02rem;}
+
+  .svrs-dash-frame{max-width:960px; margin:0 auto; border-radius:12px; overflow:hidden; border:1px solid var(--line); box-shadow:0 40px 80px -32px rgba(23,22,15,0.3);}
+  .svrs-dash-toolbar{display:flex; align-items:center; gap:0.6rem; background:var(--cream-card); padding:0.7rem 1.1rem; border-bottom:1px solid var(--line);}
+  .svrs-toolbar-dots{display:flex; gap:5px;}
+  .svrs-toolbar-dots span{width:8px; height:8px; border-radius:50%; background:var(--line-strong);}
+  .svrs-toolbar-label{font-family:'Space Mono',monospace; font-size:0.72rem; color:var(--ink-soft); margin-left:0.4rem;}
+  .svrs-toolbar-badge{
+    margin-left:auto; font-family:'Space Mono',monospace; font-size:0.62rem; letter-spacing:0.05em;
+    color:#2E8B4F; background:rgba(124,217,138,0.18); padding:0.2rem 0.55rem; border-radius:100px;
+  }
+  .svrs-dash-embed{position:relative; width:100%; aspect-ratio:16/9; background:var(--ink);}
+  .svrs-dash-embed iframe{position:absolute; inset:0; width:100%; height:100%; border:none;}
+  .svrs-dash-caption{text-align:center; font-size:0.9rem; color:var(--ink-soft); margin:1.3rem auto 0.4rem; max-width:44rem;}
+  .svrs-dash-hint{display:flex; align-items:center; justify-content:center; gap:0.4rem; font-size:0.82rem; color:var(--ink-faint); text-align:center;}
+
+  .svrs-final{background:var(--dark); color:var(--paper); padding:4.6rem 0; text-align:center;}
+  .svrs-final .svrs-sec-head h2{color:var(--paper);}
+  .svrs-final .svrs-sec-head p{color:rgba(247,243,234,0.65);}
+  .svrs-risk{max-width:34rem; margin:0 auto 1.8rem;}
+  .svrs-risk p{color:rgba(247,243,234,0.7); font-size:1rem; margin-bottom:0.7rem;}
+  .svrs-final .svrs-cta-meta{color:rgba(247,243,234,0.45);}
+
+  .svrs-footer{background:var(--dark); color:rgba(247,243,234,0.55); text-align:center; padding:2rem 0; font-size:0.85rem; border-top:1px solid rgba(247,243,234,0.1);}
+  .svrs-footer-tagline{display:block; margin-top:0.3rem; font-family:'Space Mono',monospace; font-size:0.7rem; letter-spacing:0.03em; color:rgba(247,243,234,0.35);}
+
+  @media (max-width:640px){
+    .svrs-founder-card{flex-direction:column; text-align:center;}
+    .svrs-checks{flex-direction:column; align-items:center; gap:0.7rem;}
+  }
+
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GEXEQWJWHE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  gtag("config", "G-GEXEQWJWHE");
+</script>
+</head>
+<body>
+
+<nav class="svrs-nav">
+  <div class="wrap">
+    <a href="https://blueribbonanalytics.com" class="svrs-nav-logo">
+      <img src="../images/logo-nav.png" alt="Blueribbon Analytics logo">
+      <span>Blueribbon Analytics</span>
+    </a>
+    <div class="svrs-nav-right">
+      <span class="svrs-badge-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Private Access</span>
+      <a class="btn btn-solid" style="padding:0.7rem 1.3rem; font-size:0.85rem;" href="https://tidycal.com/royce/sales-visibility-review" target="_blank" rel="noopener">Get My Sales Visibility Blueprint</a>
+    </div>
+  </div>
+</nav>
+
+<div class="svrs-review-wrap">
+  <div class="wrap">
+    <div class="svrs-review-card" data-reveal>
+      <div class="svrs-review-quote">&ldquo;</div>
+      <p class="svrs-review-text">Royce was exceptional in his approach to work, proactive, articulate, and clear in his communication. He quickly grasped a complex piece of work with just a single verbal meeting and minimal documentation. Drawing on his knowledge and experience, he delivered a highly polished and impressive outcome. I&rsquo;m extremely pleased with the results.</p>
+      <div class="svrs-review-divider"></div>
+      <div class="svrs-reviewer">
+        <div class="svrs-reviewer-avatar">JN</div>
+        <div>
+          <p class="svrs-reviewer-name">joeninety</p>
+          <p class="svrs-reviewer-location">United Kingdom</p>
+        </div>
+        <div class="svrs-reviewer-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="svrs-fiverr-badge">
+          <div class="svrs-fiverr-icon">f</div>
+          <span>Fiverr &middot; verified</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="svrs-hero">
+  <div class="wrap">
+    <div class="svrs-hero-eyebrow">For Residential Real Estate Sales Organizations</div>
+    <h1 data-reveal>Know exactly where leads are falling out, which agents are converting, and what is actually driving revenue in <i>30 days</i>, without pulling a single report manually</h1>
+    <p class="svrs-hero-body" data-reveal>The Sales Visibility Reporting System transforms your existing CRM data into a live sales command center that updates automatically every single day. No data exports, no manual formatting, no guessing, just a clear, real-time picture of your entire pipeline so you can stop chasing numbers and start making decisions with confidence.</p>
+    <a href="https://tidycal.com/royce/sales-visibility-review" class="btn btn-solid" target="_blank" rel="noopener" data-reveal>Get My Sales Visibility Blueprint</a>
+    <div class="svrs-checks" data-reveal>
+      <div class="svrs-check"><span class="svrs-check-icon">&#10003;</span>Real time insights with zero manual exports</div>
+      <div class="svrs-check"><span class="svrs-check-icon">&#10003;</span>Live in 30 days</div>
+      <div class="svrs-check"><span class="svrs-check-icon">&#10003;</span>450+ reporting systems built</div>
+    </div>
+  </div>
+</section>
+
+<section class="svrs-founder">
+  <div class="wrap">
+    <span class="svrs-founder-badge mono">Founder Note</span>
+    <h2 class="svrs-founder-hook" data-reveal>Right now, someone on your team is probably spending hours pulling numbers into a spreadsheet to get ready for your next leadership meeting.</h2>
+    <p class="svrs-founder-pain" data-reveal>And that is time they could have been spending doing the work that actually moves revenue. That trade-off happens every single week. It adds up faster than most sales leaders realize, and by the time the numbers reach the meeting, they are already a step behind what is actually happening in the pipeline.</p>
+    <div class="svrs-founder-rule"></div>
+    <div class="svrs-founder-card" data-reveal>
+      <img src="../images/royce-mekolle-profile.jpg" alt="Royce Mekolle" class="svrs-founder-photo">
+      <div>
+        <div class="svrs-founder-name">I'm Royce.</div>
+        <div class="svrs-founder-title">Founder, <a href="https://blueribbonanalytics.com" style="color:var(--blue);">Blueribbon Analytics</a></div>
+        <p class="svrs-founder-bio">Over the last 8 years I've built 450+ reporting systems for sales organizations stuck in exactly that cycle.</p>
+      </div>
+    </div>
+    <p class="svrs-founder-pitch" data-reveal>The <strong>Sales Visibility Reporting System</strong> connects directly to your existing CRM and replaces all of that manual work with a live view of every lead, agent, and pipeline stage, updated automatically.</p>
+    <p class="svrs-founder-pitch" data-reveal>The demo below is a live version built from a real client engagement. Explore it. If it looks like the visibility your sales operation has been missing, book a 30-minute call below it. No pitch, no pressure, just a clear look at what your reporting system could look like.</p>
+    <div class="svrs-founder-cta" data-reveal>
+      <a href="https://tidycal.com/royce/sales-visibility-review" class="btn btn-solid" target="_blank" rel="noopener">Get My Sales Visibility Blueprint</a>
+      <div class="svrs-cta-meta mono">
+        <span>30 minutes</span><span>&middot;</span><span>No obligation</span><span>&middot;</span><span>Personalized to your agency</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="svrs-sec">
+  <div class="wrap">
+    <div class="svrs-sec-head" data-reveal>
+      <h2>Explore the Sales Visibility Blueprint</h2>
+      <p>This is a live, interactive version of the reporting system built from real client data. Personal details have been randomized for privacy. Go ahead and explore it.</p>
+    </div>
+    <div class="svrs-dash-frame" data-reveal>
+      <div class="svrs-dash-toolbar">
+        <div class="svrs-toolbar-dots"><span></span><span></span><span></span></div>
+        <span class="svrs-toolbar-label mono">Sales Visibility Blueprint&trade;</span>
+        <span class="svrs-toolbar-badge">LIVE</span>
+      </div>
+      <div class="svrs-dash-embed">
+        <iframe title="Sales Visibility Blueprint" src="https://app.powerbi.com/view?r=eyJrIjoiZWQzMjY5NDEtODNmZS00MTVjLWE4NzgtNDFhODc0YTdkNTE0IiwidCI6ImIyNzVhMDkyLTE3ODUtNDJiZi04YjIwLWZkMjhkMjhjZjBhMCIsImMiOjl9" allowFullScreen></iframe>
+      </div>
+    </div>
+    <p class="svrs-dash-caption">Built from a real client engagement. Your system will reflect your actual CRM, pipeline, and team.</p>
+    <p class="svrs-dash-hint mono">Click the double arrow icon at the bottom right of the dashboard for full screen mode</p>
+  </div>
+</section>
+
+<section class="svrs-sec">
+  <div class="wrap">
+    <div class="svrs-sec-head" data-reveal>
+      <h2>What Happens on the Call</h2>
+    </div>
+    <div class="timeline" id="svrs-timeline" style="max-width:760px; margin:0 auto;">
+      <div class="timeline-rail"><div class="timeline-rail-fill" id="svrs-rail-fill"></div></div>
+      <div class="timeline-item" data-reveal>
+        <span class="timeline-num">1</span>
+        <div class="timeline-body">
+          <h3>We Assess Your Setup</h3>
+          <p>We look at the CRM and tools your team runs on today and confirm whether we can connect them to surface the metrics you need automatically.</p>
+        </div>
+      </div>
+      <div class="timeline-item" data-reveal>
+        <span class="timeline-num">2</span>
+        <div class="timeline-body">
+          <h3>We Map Your Key Metrics</h3>
+          <p>Together we identify the numbers you need at your fingertips when leadership asks, the ones that should be instant but take hours to pull together today.</p>
+        </div>
+      </div>
+      <div class="timeline-item" data-reveal>
+        <span class="timeline-num">3</span>
+        <div class="timeline-body">
+          <h3>You Get a Clear Path Forward</h3>
+          <p>You leave knowing exactly what your reporting system would look like, how long it takes to build, and what the investment looks like.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials">
+  <div class="wrap">
+    <span class="quote-mark" aria-hidden="true">&ldquo;</span>
+    <div class="svrs-sec-head" data-reveal style="margin-top:-1.5rem;">
+      <h2>Trusted by Teams Who Made the Switch</h2>
+    </div>
+    <div class="famewall-embed" data-src="blueribbonanalytics" data-format="carousel" data-autoplay="1" style="width:100%;display:block!important;"></div>
+  </div>
+</section>
+
+<section class="svrs-sec">
+  <div class="wrap" style="max-width:760px;">
+    <div class="svrs-sec-head" data-reveal>
+      <h2>Frequently Asked Questions</h2>
+    </div>
+    <div class="faq-list" data-reveal>
+      <div class="faq-item"><span class="faq-num mono">01</span><details><summary>What does this cost?</summary><p>Every system is priced based on your specific CRM setup, the metrics you need, and the complexity of your pipeline. Most residential real estate sales organizations land in a similar range, but I will not throw out a number that does not reflect what you actually need. You will get a clear, specific quote on the call once we know your setup.</p></details></div>
+      <div class="faq-item"><span class="faq-num mono">02</span><details><summary>Will this work with our CRM?</summary><p>Most CRMs and sales platforms support this kind of integration, whether through a direct API connection or a way to export and pull data automatically. As long as your system can do one of those two things, which the vast majority can, I can build your reporting system on top of it. If there is ever an edge case where I cannot connect to something, I will tell you in the first ten minutes of the call, not after.</p></details></div>
+      <div class="faq-item"><span class="faq-num mono">03</span><details><summary>How much time will this take from me or my team during the build?</summary><p>Very little. After our initial call, most of the heavy lifting happens on my end. I will need brief check-ins to confirm the metrics and layout match what you need, but your team does not need to pause daily work or learn anything new during the build. The entire point of this system is to give your team back time, not take more of it before launch.</p></details></div>
+      <div class="faq-item"><span class="faq-num mono">04</span><details><summary>What happens after the system is built? Do I have to maintain it myself?</summary><p>No. Once it is live, it updates automatically pulling directly from your CRM. You do not touch spreadsheets, you do not manually refresh anything. If your CRM changes or your team adds new metrics down the line, that is something we can handle together, but day to day, the system runs itself.</p></details></div>
+      <div class="faq-item"><span class="faq-num mono">05</span><details><summary>Is my data safe if I give you access to our CRM?</summary><p>Yes. I only connect to the data required to build your reporting system and I do not store or share any of it outside the system we build for you. Everything stays within your existing CRM and your private reporting environment.</p></details></div>
+      <div class="faq-item"><span class="faq-num mono">06</span><details><summary>Am I locked into a contract?</summary><p>No. This is a one time build, not a subscription. You pay for the system, it gets built, and it is yours. If you ever want ongoing support or new features added later, that is optional and entirely up to you.</p></details></div>
+    </div>
+  </div>
+</section>
+
+<section class="svrs-final">
+  <div class="wrap">
+    <div class="svrs-sec-head" data-reveal>
+      <h2>Ready to Stop Scrambling Before Every Leadership Meeting?</h2>
+    </div>
+    <div class="svrs-risk" data-reveal>
+      <p>Book a 30-minute review to assess your setup, find visibility gaps, and see automated reporting in action.</p>
+      <p>You'll leave the call with a clear picture of your reporting system, its cost, timeline, and zero pressure to proceed.</p>
+    </div>
+    <a href="https://tidycal.com/royce/sales-visibility-review" class="btn btn-solid" style="background:var(--paper); color:var(--ink);" target="_blank" rel="noopener" data-reveal>Get My Sales Visibility Blueprint</a>
+    <div class="svrs-cta-meta mono">
+      <span>30 Minutes</span><span>&middot;</span><span>No Obligation</span><span>&middot;</span><span>Personalized to Your Agency</span>
+    </div>
+  </div>
+</section>
+
+<footer class="svrs-footer">
+  <div class="wrap">
+    <span>&copy; <span id="svrs-year"></span> Blueribbon Analytics. All rights reserved.</span>
+    <span class="svrs-footer-tagline">Bringing Clarity. Driving Decisions. Growing Sales.</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var y = document.getElementById('svrs-year');
+  if(y) y.textContent = new Date().getFullYear();
+
+  var timeline = document.getElementById('svrs-timeline');
+  var railFill = document.getElementById('svrs-rail-fill');
+  function onScroll(){
+    if(timeline && railFill){
+      var rect = timeline.getBoundingClientRect();
+      var vh = window.innerHeight;
+      var start = vh * 0.8;
+      var total = rect.height + vh * 0.4;
+      var progressed = start - rect.top;
+      var fillPct = Math.max(0, Math.min(100, (progressed / total) * 100));
+      railFill.style.height = fillPct + '%';
+    }
+  }
+  onScroll();
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll);
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduceMotion && 'IntersectionObserver' in window){
+    var revealEls = document.querySelectorAll('[data-reveal]');
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.12});
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('[data-reveal]').forEach(function(el){ el.classList.add('in-view'); });
+  }
+
+  var famewallEl = document.querySelector('.famewall-embed');
+  if(famewallEl){
+    function loadFamewall(){
+      if(document.querySelector('script[data-famewall-loaded]')) return;
+      var s = document.createElement('script');
+      s.src = 'https://embed.famewall.io/newFrame.js';
+      s.setAttribute('data-famewall-loaded', '1');
+      document.body.appendChild(s);
+    }
+    if('IntersectionObserver' in window){
+      var fwObserver = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){
+            loadFamewall();
+            fwObserver.disconnect();
+          }
+        });
+      }, {rootMargin:'400px 0px'});
+      fwObserver.observe(famewallEl);
+    } else {
+      loadFamewall();
+    }
+  }
+})();
+</script>
+
+</body>
+</html>
