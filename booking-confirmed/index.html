@@ -475,6 +475,22 @@
   .bc-footer-bottom{font-size:0.8rem; color:var(--ink-faint); margin-top:0.8rem;}
 
 </style>
+<!-- Tracking settings: fill these in, the page is safe to upload before you do -->
+<script>
+  var BR_ADS_ID = "AW-XXXXXXXXXX";               /* Google Ads tag ID */
+  var BR_ADS_LABEL = "XXXXXXXXXXXXXXXXXXXX";     /* Booked call conversion label */
+  var BR_SHEET_URL = "https://script.google.com/macros/s/AKfycbxACrMKPXlZufUL_s5ASy49I-7M59dkWiHz_Qx0vZxIMBBhcmV2WfkH8BOLVbYvtOyr/exec"; /* Operations web app */
+</script>
+
+<!-- Read booking details from the TidyCal redirect, then remove them from the address bar before any tag loads -->
+<script>
+  (function () {
+    var q = new URLSearchParams(location.search);
+    window.brLead = { email: (q.get("e") || "").trim(), name: (q.get("n") || "").trim() };
+    if (location.search) history.replaceState(null, "", location.pathname);
+  })();
+</script>
+
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-GEXEQWJWHE"></script>
 <script>
@@ -482,6 +498,9 @@
   function gtag(){dataLayer.push(arguments);}
   gtag("js", new Date());
   gtag("config", "G-GEXEQWJWHE");
+  if (BR_ADS_ID.indexOf("XXXX") === -1) {
+    gtag("config", BR_ADS_ID, { allow_enhanced_conversions: true });
+  }
 </script>
 </head>
 <body>
@@ -529,6 +548,50 @@
     <div class="bc-footer-bottom">Copyright &copy; 2026 Blueribbon Analytics. All rights reserved.</div>
   </div>
 </footer>
+
+<!-- Booked call tracking: fires once per real booking -->
+<script>
+  (function () {
+    var lead = window.brLead || {};
+    if (!lead.email) return;
+    var key = "br_booked_" + lead.email.toLowerCase();
+    try { if (sessionStorage.getItem(key)) return; } catch (e) {}
+
+    var attr = {};
+    try {
+      attr = JSON.parse(localStorage.getItem("br_attr") || "{}");
+      if (attr.ts && Date.now() - attr.ts > 90 * 864e5) attr = {};
+    } catch (e) { attr = {}; }
+
+    gtag("set", "user_data", { email: lead.email });
+
+    if (BR_ADS_ID.indexOf("XXXX") === -1) {
+      gtag("event", "conversion", { send_to: BR_ADS_ID + "/" + BR_ADS_LABEL });
+    }
+
+    gtag("event", "generate_lead", {
+      lead_source: attr.utm_source || "direct",
+      campaign: attr.utm_campaign || "",
+      term: attr.utm_term || "",
+      landing_page: attr.landing_page || ""
+    });
+
+    if (BR_SHEET_URL.indexOf("http") === 0) {
+      var row = {
+        email: lead.email, name: lead.name,
+        gclid: attr.gclid || "", gbraid: attr.gbraid || "", wbraid: attr.wbraid || "",
+        utm_source: attr.utm_source || "", utm_medium: attr.utm_medium || "",
+        utm_campaign: attr.utm_campaign || "", utm_term: attr.utm_term || "",
+        utm_content: attr.utm_content || "", landing_page: attr.landing_page || ""
+      };
+      try {
+        fetch(BR_SHEET_URL, { method: "POST", mode: "no-cors", body: JSON.stringify(row) });
+      } catch (e) {}
+    }
+
+    try { sessionStorage.setItem(key, "1"); } catch (e) {}
+  })();
+</script>
 
 </body>
 </html>
