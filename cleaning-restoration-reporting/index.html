@@ -476,8 +476,8 @@
 .crl-chip{ display:inline-block; font-size:0.68rem; letter-spacing:0.04em; text-transform:uppercase; color:var(--rust-soft); border:1px solid rgba(227,179,146,0.35); background:rgba(227,179,146,0.08); padding:0.4rem 0.8rem; border-radius:100px; }
 .crl-badges{ display:flex; align-items:center; gap:1rem; }
 .crl-badge img{ height:52px; display:block; }
-.crl-single-visual{ border-radius:var(--radius-lg); overflow:hidden; border:1px solid rgba(247,243,234,0.14); box-shadow:0 40px 90px -30px rgba(0,0,0,0.55); }
-.crl-single-visual img{ width:100%; display:block; }
+.crl-single-visual{ border-radius:var(--radius-lg); overflow:hidden; border:1px solid rgba(247,243,234,0.14); box-shadow:0 40px 90px -30px rgba(0,0,0,0.55); align-self:stretch; min-height:420px; }
+.crl-single-visual img, .crl-single-visual video{ width:100%; height:100%; display:block; object-fit:cover; }
 
 .crl-light h2, .crl-dark-alt h2{ font-family:'Instrument Serif', serif; font-size:clamp(1.7rem, 3vw, 2.4rem); line-height:1.2; margin-bottom:1rem; }
 .crl-light h2{ color:var(--ink); }
@@ -530,7 +530,8 @@
 
 @media (max-width: 900px){
   .crl-hero-grid{ grid-template-columns:1fr; }
-  .crl-single-visual{ order:-1; }
+  .crl-single-visual{ order:-1; min-height:0; }
+  .crl-single-visual img, .crl-single-visual video{ height:auto; aspect-ratio:16/9; }
   .crl-vp-grid{ grid-template-columns:repeat(2, 1fr); }
   .crl-steps{ grid-template-columns:repeat(2, 1fr); }
   .crl-closer-grid{ grid-template-columns:1fr; }
@@ -581,7 +582,7 @@
         </div>
       </div>
       <div class="crl-single-visual" data-reveal>
-        <img src="assets/cleanusa-sales-performance.png" alt="Live reporting system built for CleanUSA, a cleaning and restoration company, showing calls, won jobs, estimates, invoiced and collected amounts against targets">
+        <video src="assets/cleaning-co-hero.mp4" poster="assets/cleaning-co-hero-poster.jpg" autoplay muted loop playsinline aria-label="Live reporting system built for CleanUSA, a cleaning and restoration company, showing calls, won jobs, estimates, invoiced and collected amounts against targets"></video>
       </div>
     </div>
   </div>
@@ -606,9 +607,9 @@
       <p class="crl-try-sub" data-reveal>This one was built for a cleaning and restoration company. Click through the pages, change the month and see how job, referral and payment data comes together in one place.</p>
     </div>
     <div class="crl-try-frame crl-try-frame-wide" data-reveal>
-      <iframe title="Live reporting system demo" src="https://app.powerbi.com/view?r=eyJrIjoiZWMyNmJlMDktNDlhOC00MWQwLTliMjctYzZhODczZjYxMzQyIiwidCI6ImIyNzVhMDkyLTE3ODUtNDJiZi04YjIwLWZkMjhkMjhjZjBhMCIsImMiOjl9" frameborder="0" allowfullscreen="true" style="width:100%; height:100%; border:0;"></iframe>
+      <iframe title="Live reporting system demo" src="https://app.powerbi.com/view?r=eyJrIjoiOTZiNDRkNGYtY2UxZS00YjBlLTg1YzYtNDM1MmE2YmIyOTZiIiwidCI6ImIyNzVhMDkyLTE3ODUtNDJiZi04YjIwLWZkMjhkMjhjZjBhMCIsImMiOjl9" frameborder="0" allowfullscreen="true" style="width:100%; height:100%; border:0;"></iframe>
     </div>
-    <p class="crl-try-footnote">Built from a real client engagement. Your system will reflect your actual CRM, pipeline, and team.<br>Click the double arrow icon at the bottom right of the dashboard for full screen mode.</p>
+    <p class="crl-try-footnote">Built from a real client engagement. Your system will reflect your actual data.<br>Click the double arrow icon at the bottom right of the dashboard for full screen mode.</p>
     <p class="crl-try-note mono">Easiest to explore on a larger screen.</p>
   </div>
 </section>
