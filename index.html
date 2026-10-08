@@ -1177,6 +1177,13 @@
         form.reset();
         status.className = 'form-status success';
         status.textContent = 'Thanks. Your question has been sent.';
+        try {
+          if (typeof window.gtag === 'function') {
+            window.gtag('event', 'enquiry_submitted');
+          }
+        } catch (_) {
+          // Analytics must not interrupt a successful submission.
+        }
       } else {
         throw new Error(result.message || 'Submission failed');
       }
