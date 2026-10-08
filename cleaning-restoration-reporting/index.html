@@ -815,7 +815,14 @@
     try{
       var response=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}});
       var result=await response.json();
-      if(response.ok && result.success){form.reset();status.className='crl-form-status success';status.textContent='Thanks. Your question has been sent.';}
+      if(response.ok && result.success){form.reset();status.className='crl-form-status success';status.textContent='Thanks. Your question has been sent.';
+        try {
+          if (typeof window.gtag === 'function') {
+            window.gtag('event', 'enquiry_submitted');
+          }
+        } catch (_) {
+          // Analytics must not interrupt a successful submission.
+        }}
       else{throw new Error(result.message||'Submission failed');}
     }catch(err){status.className='crl-form-status error';status.textContent='Something went wrong. Please email royce@blueribbonanalytics.com instead.';}
     finally{button.disabled=false;button.textContent=original;}
