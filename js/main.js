@@ -232,4 +232,44 @@
     if (c === 'granted') { if (w.requestIdleCallback) w.requestIdleCallback(loadGA, { timeout: 4000 }); else setTimeout(loadGA, 2000); }
     else if (c !== 'denied') { setTimeout(function () { showBanner(true); }, 1800); }
   });
+
+  /* ---------- scroll progress line ---------- */
+  var bar = $('#progress');
+  if (bar && !reduce) {
+    var pt = false;
+    var upd = function () {
+      var y = w.pageYOffset || d.documentElement.scrollTop, m = d.documentElement.scrollHeight - w.innerHeight;
+      bar.style.transform = 'scaleX(' + (m > 0 ? Math.min(1, y / m) : 0) + ')'; pt = false;
+    };
+    w.addEventListener('scroll', function () { if (!pt) { pt = true; w.requestAnimationFrame(upd); } }, { passive: true });
+    upd();
+  }
+
+  /* ---------- show fewer client results until asked ---------- */
+  var casesEl = $('.cases');
+  if (casesEl && $('.case.more', casesEl)) {
+    casesEl.classList.add('collapsed');
+    var tgl = d.createElement('button');
+    tgl.type = 'button'; tgl.className = 'btn btn-ghost cases-toggle';
+    tgl.setAttribute('aria-expanded', 'false'); tgl.textContent = 'Show more client results';
+    casesEl.parentNode.insertBefore(tgl, casesEl.nextSibling);
+    tgl.addEventListener('click', function () {
+      var open = casesEl.classList.toggle('collapsed') === false;
+      tgl.setAttribute('aria-expanded', open ? 'true' : 'false');
+      tgl.textContent = open ? 'Show fewer client results' : 'Show more client results';
+      if (open) $$('.case.more', casesEl).forEach(function (el) { el.classList.add('in-view'); });
+    });
+  }
+
+  /* ---------- magnetic gold buttons (mouse only) ---------- */
+  if (finePointer && !reduce) {
+    $$('.btn-cta').forEach(function (b) {
+      b.addEventListener('pointermove', function (e) {
+        var r = b.getBoundingClientRect();
+        var dx = (e.clientX - (r.left + r.width / 2)) / r.width, dy = (e.clientY - (r.top + r.height / 2)) / r.height;
+        b.style.transform = 'translate(' + (dx * 8).toFixed(1) + 'px,' + (dy * 6).toFixed(1) + 'px)';
+      }, { passive: true });
+      b.addEventListener('pointerleave', function () { b.style.transform = ''; });
+    });
+  }
 })();
