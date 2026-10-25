@@ -191,7 +191,7 @@
           a.textContent = 'Book a time now.';
           a.setAttribute('data-book', 'form-success');
           status.appendChild(a);
-          track('builder_inquiry', { method: 'form' });
+          track('enquiry_submitted');
         })
         .catch(function () {
           status.className = 'status err';
