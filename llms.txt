@@ -1,0 +1,22 @@
+# Blueribbon Analytics
+
+> Blueribbon Analytics builds custom Power BI reporting systems for ADU, casita, guest-house and custom-home builders in the United States. It connects job management, accounting, CRM, spreadsheets and marketing reports into one automated reporting system, live in 30 days, then looks after it every month.
+
+## What we do
+- Build a custom reporting system around the decisions a builder makes each week: job margin, cash and receivables, lead pipeline, change orders, backlog.
+- Connect the systems builders already use (for example JobTread, QuickBooks, a CRM, spreadsheets and marketing agency reports) into a data warehouse in the client's own cloud account.
+- Four steps over about 30 days: Understand, Connect, Build, Launch. Then a monthly maintenance service.
+- Projects start at $2,500, as a fixed price to build plus one monthly fee to keep it right.
+
+## Who it is for
+- Owners or partners of ADU, casita, guest-house and custom-home building businesses in the US who want margin and cash visible while jobs are live.
+
+## Who runs it
+- Royce Mekolle, Microsoft Certified Power BI Data Analyst and FMVA, 11+ years in finance and operations. https://www.linkedin.com/in/roycemekolle/
+
+## Key pages
+- Home: https://blueribbonanalytics.com/
+- Client results: https://blueribbonanalytics.com/#results
+- FAQ: https://blueribbonanalytics.com/#faq
+- Book a 30-minute call: https://tidycal.com/royce/30-minute-meeting-m5n5yjx-mpyvo7q
+- Privacy: https://blueribbonanalytics.com/privacy/
