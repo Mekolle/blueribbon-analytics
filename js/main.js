@@ -229,7 +229,7 @@
   }
   w.addEventListener('load', function () {
     var c = getConsent();
-    if (c === 'granted') { (w.requestIdleCallback || setTimeout)(loadGA, 2000); }
+    if (c === 'granted') { if (w.requestIdleCallback) w.requestIdleCallback(loadGA, { timeout: 4000 }); else setTimeout(loadGA, 2000); }
     else if (c !== 'denied') { setTimeout(function () { showBanner(true); }, 1800); }
   });
 })();
