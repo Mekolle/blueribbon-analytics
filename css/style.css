@@ -675,3 +675,7 @@ main > section.panel:first-of-type{margin-top:var(--gut);}
 .legal code{font-family:var(--mono); font-size:.9em; background:rgba(255,255,255,.07); padding:.1em .4em; border-radius:6px;}
 .foot-panel .foot a{color:var(--muted); text-decoration:underline; text-underline-offset:3px;}
 .consent p .linkbtn{font-size:inherit; margin-left:.3rem;}
+
+.ft a.in{display:inline-flex; align-items:center; gap:.6rem;}
+.ft a.in svg{width:18px; height:18px; color:var(--gold);}
+.ft a.in:hover svg{color:#fff;}
