@@ -647,3 +647,19 @@ main > section.panel:first-of-type{margin-top:var(--gut);}
 .why-card p{color:var(--muted); font-size:.98rem;}
 @media (max-width:1100px){ .about-grid{grid-template-columns:1fr;} .photo{max-width:560px;} }
 @media (max-width:640px){ .why{grid-template-columns:1fr;} .why-card{min-height:0;} }
+
+/* ---------- v2.8: gold icons, top menu, larger intro, CTA below diagram ---------- */
+.ico{background:rgba(242,192,99,.1); border-color:rgba(242,192,99,.38); box-shadow:0 0 36px -8px rgba(242,192,99,.45);}
+.ico svg,.src .ic svg,.hub svg{stroke:var(--gold);}
+.src .ic{background:rgba(242,192,99,.1); border-color:rgba(242,192,99,.38);}
+.yes .tick-i{background:rgba(242,192,99,.12); border-color:rgba(242,192,99,.4);} .yes .tick-i svg{stroke:var(--gold);}
+.no .tick-i{background:rgba(242,192,99,.06); border-color:rgba(242,192,99,.25);} .no .tick-i svg{stroke:var(--gold); opacity:.65;}
+.case .lnk svg{stroke:var(--gold);}
+.faq .pm::before,.faq .pm::after{background:var(--gold);}
+.nav-actions{display:flex; align-items:center; gap:.4rem;}
+.nav-links{flex:1; justify-content:center;}
+.nav-toggle{border:1px solid var(--line-2);}
+.hero-row .lede{max-width:min(100%,82rem); font-size:clamp(1.15rem,1.75vw,1.95rem); line-height:1.5; color:#D6DDEC; text-wrap:pretty;}
+.hero-cta{margin:clamp(1.8rem,3vw,3rem) 0 clamp(.4rem,1vw,1rem);}
+.privacy{margin-top:1.1rem; font-size:.95rem; color:var(--muted); text-decoration:underline; text-decoration-color:var(--gold); text-decoration-thickness:2px; text-underline-offset:7px;}
+@media (max-width:960px){ .nav-links{flex:none; justify-content:flex-start;} }

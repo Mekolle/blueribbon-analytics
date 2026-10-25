@@ -187,7 +187,7 @@
           status.className = 'status ok';
           status.textContent = "Thanks, I've got your details. Want to skip the wait? ";
           var a = d.createElement('a');
-          a.href = 'https://tidycal.com/royce/30-minute-meeting';
+          a.href = 'https://tidycal.com/royce/30-minute-meeting-m5n5yjx-mpyvo7q';
           a.textContent = 'Book a time now.';
           a.setAttribute('data-book', 'form-success');
           status.appendChild(a);
