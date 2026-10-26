@@ -784,3 +784,12 @@ main > section.panel:first-of-type{margin-top:var(--gut);}
 .post-link svg{width:15px; height:15px; fill:none; stroke:var(--gold); stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round;}
 .legal a.btn,.legal a.btn:hover{color:#1A1206; text-decoration:none;}
 .article .sec-cta{margin:1.2rem 0 1.4rem;}
+
+/* ---------- article cover and card thumbnail ---------- */
+.cover{margin:2rem 0 0; border-radius:24px; overflow:hidden; border:1px solid var(--line-2); box-shadow:0 40px 80px -46px rgba(91,141,255,.55); max-width:1000px;}
+.cover img{display:block; width:100%; height:auto; aspect-ratio:16/9;}
+.post{display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); gap:clamp(1.2rem,2.4vw,2.4rem); align-items:center;}
+.post-img{width:100%; height:auto; aspect-ratio:16/9; object-fit:cover; border-radius:16px; border:1px solid var(--line);}
+.post-text{display:block;}
+.posts{max-width:70rem;}
+@media (max-width:760px){ .post{grid-template-columns:1fr;} }
