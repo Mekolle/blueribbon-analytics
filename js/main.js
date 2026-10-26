@@ -278,4 +278,24 @@
       b.addEventListener('pointerleave', function () { b.style.transform = ''; });
     });
   }
+
+  /* ---------- share links ---------- */
+  d.addEventListener('click', function (e) {
+    var s = e.target.closest && e.target.closest('[data-share]');
+    if (!s) return;
+    var how = s.getAttribute('data-share');
+    track('share_click', { method: how });
+    if (how === 'copy') {
+      var url = s.getAttribute('data-copy'), t = $('.copy-t', s);
+      var done = function () { if (t) { t.textContent = 'Link copied'; setTimeout(function () { t.textContent = 'Copy link'; }, 2200); } };
+      var fallback = function () {
+        var ta = d.createElement('textarea'); ta.value = url; ta.setAttribute('readonly', ''); ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0';
+        d.body.appendChild(ta); ta.select();
+        var ok = false; try { ok = d.execCommand('copy'); } catch (x) {}
+        ta.remove();
+        if (ok) done(); else if (t) { t.textContent = 'Copy: ' + url.replace('https://', ''); }
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(url).then(done, fallback); } else { fallback(); }
+    }
+  });
 })();
