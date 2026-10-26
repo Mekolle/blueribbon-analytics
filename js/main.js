@@ -170,9 +170,11 @@
     } else { loadFame(); }
   }
 
-  /* ---------- contact form (Web3Forms) ---------- */
-  var form = $('#qform'), status = $('#fstatus');
-  if (form && status) {
+  /* ---------- forms (Web3Forms) ---------- */
+  $$('form[action*="web3forms"]').forEach(function (form) {
+    var status = $('.status', form) || $('#fstatus');
+    if (!status) return;
+    var okMsg = form.getAttribute('data-success');
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var btn = form.querySelector('button[type="submit"]');
@@ -185,12 +187,16 @@
           if (!(res.ok && res.j.success)) throw new Error(res.j.message || 'failed');
           form.reset();
           status.className = 'status ok';
-          status.textContent = "Thanks, I've got your details. Want to skip the wait? ";
-          var a = d.createElement('a');
-          a.href = 'https://tidycal.com/royce/30-minute-meeting-m5n5yjx-mpyvo7q';
-          a.textContent = 'Book a time now.';
-          a.setAttribute('data-book', 'form-success');
-          status.appendChild(a);
+          if (okMsg) {
+            status.textContent = okMsg;
+          } else {
+            status.textContent = "Thanks, I've got your details. Want to skip the wait? ";
+            var a = d.createElement('a');
+            a.href = 'https://tidycal.com/royce/30-minute-meeting-m5n5yjx-mpyvo7q';
+            a.textContent = 'Book a time now.';
+            a.setAttribute('data-book', 'form-success');
+            status.appendChild(a);
+          }
           track('enquiry_submitted');
         })
         .catch(function () {
@@ -199,7 +205,7 @@
         })
         .then(function () { btn.disabled = false; btn.textContent = label; });
     });
-  }
+  });
 
   /* ---------- booking click tracking (delegated) ---------- */
   d.addEventListener('click', function (e) {

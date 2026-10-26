@@ -744,3 +744,43 @@ main > section.panel:first-of-type{margin-top:var(--gut);}
 /* v3.1: the headline reveal runs from CSS alone, so it never waits for main.js on slow connections */
 @keyframes riseup{from{transform:translateY(112%);} to{transform:none;}}
 .js .hero h1 .w > span{transform:none; transition:none; animation:riseup .9s var(--ease) both; animation-delay:calc(.05s + var(--k,0) * 34ms);}
+
+/* ---------- v3.2: article pages ---------- */
+.article .crumbs{display:flex; gap:.6rem; flex-wrap:wrap; font-family:var(--mono); font-size:.76rem; color:var(--dim); margin-bottom:1.6rem;}
+.article .crumbs a{color:var(--muted);} .article .crumbs a:hover{color:var(--gold);}
+.article h1{max-width:18em;}
+.byline{margin-top:1.2rem; color:var(--muted); font-size:.98rem;}
+.byline a{color:var(--text); border-bottom:1px solid var(--gold);}
+.toc{padding:1.4rem 1.6rem; border-radius:20px; background:var(--panel-2); border:1px solid var(--line-2);}
+.toc-h{font-family:var(--mono); font-size:.74rem; letter-spacing:.09em; text-transform:uppercase; color:var(--gold); margin-bottom:.8rem;}
+.toc ul{list-style:none; margin:0; padding:0; display:grid; gap:.55rem;}
+.toc a{color:var(--muted);} .toc a:hover{color:var(--gold);}
+.article-body{display:grid; grid-template-columns:minmax(0,52rem) minmax(0,19rem); gap:clamp(2rem,5vw,5rem); align-items:start; margin-top:2rem;}
+.article-body .toc{order:2; position:sticky; top:7rem; margin:0;}
+.article-body .prose{order:1; margin-top:0;}
+@media (max-width:1100px){ .article-body{grid-template-columns:1fr;} .article-body .toc{order:0; position:static; margin-bottom:1.6rem;} }
+.prose{max-width:52rem;}
+.prose h2{scroll-margin-top:7rem;}
+.prose h3{font-size:clamp(1.2rem,1.6vw,1.5rem); margin:1.8rem 0 .5rem;}
+.prose p{margin:0 0 1.1rem;}
+.prose ul,.prose ol{margin:0 0 1.2rem; padding-left:1.3rem;}
+.prose ol li{list-style:decimal;}
+.prose strong{color:var(--text);}
+.tbl{overflow-x:auto; margin:1.4rem 0; border:1px solid var(--line-2); border-radius:16px;}
+.tbl table{width:100%; border-collapse:collapse; min-width:36rem;}
+.tbl th,.tbl td{padding:.9rem 1.1rem; text-align:left; vertical-align:top; border-bottom:1px solid var(--line); font-size:.98rem;}
+.tbl th{font-family:var(--mono); font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--gold); background:rgba(242,192,99,.06);}
+.tbl tr:last-child td{border-bottom:0;}
+.tbl td{color:var(--muted);} .tbl td:first-child{color:var(--text);}
+.article-form{margin:1.6rem 0 2rem; padding:clamp(1.2rem,2.4vw,2rem); border-radius:22px; background:var(--panel-2); border:1px solid var(--line-2);}
+.article .sec-cta{justify-content:flex-start;}
+.related{margin-top:2rem; font-size:.95rem;}
+.posts{display:grid; gap:var(--gut); margin-top:2.2rem; max-width:60rem;}
+.post{display:block; padding:clamp(1.4rem,2.4vw,2.4rem);}
+.post h2{font-size:clamp(1.5rem,2.4vw,2.3rem); margin:.7rem 0 .9rem;}
+.post p{color:var(--muted);}
+.post-meta{font-family:var(--mono); font-size:.76rem; letter-spacing:.06em; text-transform:uppercase; color:var(--gold);}
+.post-link{display:inline-flex; gap:.5rem; margin-top:1.2rem; font-weight:700; color:var(--text);}
+.post-link svg{width:15px; height:15px; fill:none; stroke:var(--gold); stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round;}
+.legal a.btn,.legal a.btn:hover{color:#1A1206; text-decoration:none;}
+.article .sec-cta{margin:1.2rem 0 1.4rem;}
