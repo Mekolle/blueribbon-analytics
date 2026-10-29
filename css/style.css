@@ -802,3 +802,8 @@ main > section.panel:first-of-type{margin-top:var(--gut);}
 .share-b{display:inline-flex; align-items:center; gap:.5rem; min-height:40px; padding:.4rem 1rem; border-radius:999px; border:1px solid var(--line-2); background:rgba(255,255,255,.04); color:var(--text) !important; font-size:.88rem; font-weight:600; text-decoration:none !important; cursor:pointer; transition:border-color .25s ease, background-color .25s ease, transform .3s var(--ease);}
 .share-b svg{width:15px; height:15px; color:var(--gold);}
 .share-b:hover{border-color:rgba(242,192,99,.6); background:rgba(242,192,99,.08); transform:translateY(-2px);}
+
+/* ---------- v3.3: article figures and subhead ---------- */
+.article .subhead{font-family:var(--serif,inherit); font-size:clamp(1.1rem,1.6vw,1.4rem); color:var(--muted); margin-top:.8rem; max-width:34em;}
+.prose figure{margin:1.8rem 0;}
+.prose figure img{width:100%;height:auto;display:block;border-radius:16px;border:1px solid var(--line-2);}

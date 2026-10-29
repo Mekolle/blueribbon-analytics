@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to Set Up a Reporting System in Power BI for Builders</title>
+<meta name="description" content="A step-by-step guide to setting up a reporting system for a building company, using JobTread, GoHighLevel and QuickBooks data with BigQuery and Power BI.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#050C1C">
+
+
+
+
+
+
+<link rel="canonical" href="https://blueribbonanalytics.com/resources/how-to-set-up-a-reporting-system-power-bi/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Blueribbon Analytics">
+<meta property="og:title" content="How to Set Up a Reporting System for a Building Company">
+<meta property="og:description" content="A step-by-step guide to setting up a reporting system for a building company, using JobTread, GoHighLevel and QuickBooks data with BigQuery and Power BI.">
+<meta property="og:url" content="https://blueribbonanalytics.com/resources/how-to-set-up-a-reporting-system-power-bi/">
+<meta property="og:image" content="https://blueribbonanalytics.com/images/articles/how-to-set-up-a-reporting-system-power-bi.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="675">
+<meta property="og:image:alt" content="Cover of the article How to Set Up a Reporting System: leads, jobs and invoices flowing into a warehouse and a Power BI executive overview.">
+<meta property="article:published_time" content="2026-10-29">
+<meta property="article:author" content="Royce Mekolle">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How to Set Up a Reporting System for a Building Company">
+<meta name="twitter:description" content="A step-by-step guide to setting up a reporting system for a building company, using JobTread, GoHighLevel and QuickBooks data with BigQuery and Power BI.">
+<meta name="twitter:image" content="https://blueribbonanalytics.com/images/articles/how-to-set-up-a-reporting-system-power-bi.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "How to Set Up a Reporting System for a Building Company",
+  "alternativeHeadline": "Connecting JobTread, GoHighLevel and QuickBooks to Power BI",
+  "description": "A step-by-step guide to setting up a reporting system for a building company, using JobTread, GoHighLevel and QuickBooks data with BigQuery and Power BI.",
+  "datePublished": "2026-10-29",
+  "dateModified": "2026-10-29",
+  "mainEntityOfPage": "https://blueribbonanalytics.com/resources/how-to-set-up-a-reporting-system-power-bi/",
+  "image": [
+    "https://blueribbonanalytics.com/images/articles/how-to-set-up-a-reporting-system-power-bi.jpg"
+  ],
+  "author": {
+    "@type": "Person",
+    "name": "Royce Mekolle",
+    "image": "https://blueribbonanalytics.com/images/royce-avatar.webp",
+    "url": "https://www.linkedin.com/in/roycemekolle/",
+    "jobTitle": "Founder, Blueribbon Analytics"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Blueribbon Analytics",
+    "url": "https://blueribbonanalytics.com/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://blueribbonanalytics.com/images/favicon.png"
+    }
+  },
+  "about": [
+    "Reporting systems",
+    "Power BI",
+    "JobTread",
+    "GoHighLevel",
+    "QuickBooks",
+    "Google BigQuery"
+  ],
+  "wordCount": 1973
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why use a cloud database instead of connecting Power BI directly to each tool?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Tools like JobTread and GoHighLevel don’t come with ready-made Power BI connectors. While they do provide an API where Power Query can use to pull, this turn to be very slow, especially with high volumes of data. A cloud database keeps the full history and joins the tools in one place. Refreshes stay fast and don’t depend on a computer being switched on."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which cloud database should a small builder use?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Any of the common options works. Google BigQuery is used in this guide because it handles small data volumes well and costs little at that size. Microsoft Fabric suits companies already deep in the Microsoft ecosystem."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does it cost to run each month?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "At a typical small builder’s data volumes, the cloud side usually costs very little, often within Google’s free usage limits. The main running cost is a Power BI licence for each person who views the reports."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How often should the data refresh?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Twice a day suits most builders. It can run more often if the business needs it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it slow down JobTread, GoHighLevel or QuickBooks?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The data pulls are small, read-only requests, and they can be scheduled outside busy hours."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens when one of the tools changes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The failure alerts from step 2 flag it. The script then needs updating, and the step 5 checks should be run again."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://blueribbonanalytics.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Resources",
+      "item": "https://blueribbonanalytics.com/resources/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "How to Set Up a Reporting System for a Building Company",
+      "item": "https://blueribbonanalytics.com/resources/how-to-set-up-a-reporting-system-power-bi/"
+    }
+  ]
+}
+</script>
+<link rel="icon" href="../../images/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&amp;family=Manrope:wght@400..800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&amp;family=Manrope:wght@400..800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"></noscript>
+<link rel="stylesheet" href="../../css/style.css?v=20261029a">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="nav" id="nav">
+  <div class="shell">
+    <div class="nav-in">
+      <a class="brand" href="../../" aria-label="Blueribbon Analytics, home">
+        <img src="../../images/mark.png" width="16" height="34" alt="">
+        <span>Blueribbon Analytics</span>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="../../#system">How it works</a></li>
+        <li><a href="../../#results">Reporting systems</a></li>
+        <li><a href="../../#faq">FAQ</a></li>
+        <li><a href="../" aria-current="page">Resources</a></li>
+        <li><a href="../../#question">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a class="btn btn-cta btn-sm" href="https://tidycal.com/royce/30-minute-meeting-m5n5yjx-mpyvo7q" data-book="resources-nav">Book a 30-minute call <svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-arrow"/></svg></a>
+        <button class="nav-toggle" id="nav-toggle" aria-controls="nav-links" aria-expanded="false" aria-label="Open menu"><svg viewBox="0 0 24 24"><path d="M4 8h16M4 16h16"/></svg></button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></symbol></defs></svg>
+
+<main id="main" class="shell">
+  <article class="panel legal-panel article" itemscope itemtype="https://schema.org/BlogPosting">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Home</a><span aria-hidden="true">/</span><a href="../">Resources</a><span aria-hidden="true">/</span><span aria-current="page">Set up a reporting system</span></nav>
+    <p class="eyebrow">Resources</p>
+    <h1 class="h2" itemprop="headline">How to Set Up a Reporting System for a Building Company</h1>
+    <p class="subhead">Connecting JobTread, GoHighLevel and QuickBooks to Power BI</p>
+    <div class="byline"><img class="avatar" src="../../images/royce-avatar.webp" width="40" height="40" alt="Royce Mekolle" decoding="async" style="width:40px;height:40px;border-radius:50%;object-fit:cover"><p>By <a href="https://www.linkedin.com/in/roycemekolle/" target="_blank" rel="noopener" itemprop="author">Royce Mekolle</a>, Microsoft Certified Power BI Data Analyst <span aria-hidden="true">&middot;</span> <time datetime="2026-10-29" itemprop="datePublished">October 29, 2026</time> <span aria-hidden="true">&middot;</span> 9 min read</p></div>
+    <div class="share" role="group" aria-label="Share this article">
+      <span class="share-l">Share this article</span>
+      <a class="share-b" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblueribbonanalytics.com%2Fresources%2Fhow-to-set-up-a-reporting-system-power-bi%2F" target="_blank" rel="noopener" data-share="linkedin"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24"><path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn</a>
+      <a class="share-b" href="mailto:?subject=How%20to%20Set%20Up%20a%20Reporting%20System%20for%20a%20Building%20Company&amp;body=Worth%20a%20read%3A%20https%3A//blueribbonanalytics.com/resources/how-to-set-up-a-reporting-system-power-bi/" data-share="email"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24"><path d="M3 6h18v12H3z M3 7l9 6 9-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Email</a>
+      <button class="share-b" type="button" data-copy="https://blueribbonanalytics.com/resources/how-to-set-up-a-reporting-system-power-bi/" data-share="copy"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1 M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="copy-t">Copy link</span></button>
+    </div>
+
+    <figure class="cover"><img src="../../images/articles/how-to-set-up-a-reporting-system-power-bi.webp" srcset="../../images/articles/how-to-set-up-a-reporting-system-power-bi-640.webp 640w, ../../images/articles/how-to-set-up-a-reporting-system-power-bi.webp 1200w" sizes="(max-width: 1100px) 92vw, 1000px" width="1200" height="675" fetchpriority="high" decoding="async" alt="Cover of the article How to Set Up a Reporting System: leads, jobs and invoices flowing into a warehouse and a Power BI executive overview."></figure>
+
+    <div class="article-body">
+    <nav class="toc" aria-label="In this article">
+      <p class="toc-h">In this article</p>
+      <ul><li><a href="#parts">The five parts of a reporting system</a></li><li><a href="#step-1">Step 1: Start with the questions, then map the tools</a></li><li><a href="#step-2">Step 2: Pull the data automatically</a></li><li><a href="#step-3">Step 3: Store and prepare the data in layers</a></li><li><a href="#step-4">Step 4: Build the Power BI model and reports</a></li><li><a href="#step-5">Step 5: Check every number against the source</a></li><li><a href="#tools">What this looks like with JobTread, GoHighLevel and QuickBooks</a></li><li><a href="#lead">Following one lead through all three tools</a></li><li><a href="#other-tools">Using different tools? The process stays the same</a></li><li><a href="#running">Keeping it running</a></li><li><a href="#faq">Frequently asked questions</a></li><li><a href="#help">Need help with your reporting?</a></li></ul>
+    </nav>
+
+    <div class="legal prose" itemprop="articleBody">
+      <p>In our last article, <a href="https://blueribbonanalytics.com/resources/why-every-home-builder-needs-a-reporting-system/">Why Every Home Builder Needs a Reporting System</a>, we covered why a growing building company needs one place that pulls the numbers from the tools it already uses and keeps them up to date on its own. The next question is how to set one up.</p><p>This guide walks through the process step by step. The examples come from a common setup for ADU, casita and custom home builders: JobTread for jobs, GoHighLevel for leads and QuickBooks Online for the books. If you use different tools, the process still applies, so keep reading so you can apply the same process.</p><h2 id="parts">The five parts of a reporting system</h2><p>Every reporting system has the same five parts, whatever tools sit at the start.</p><figure><img src="../../images/articles/setup-five-parts.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Diagram of the five parts of a reporting system: your tools, a scheduled Python script in the cloud, a Google BigQuery database with bronze, silver and gold layers, a Power BI model, and reports on phone and desktop."></figure><ol><li><strong>Your tools.</strong> These are where the work happens and where the data starts. They stay exactly as they are.</li><li><strong>A scheduled data pull.</strong> Code that collects the data from each tool automatically, usually at a defined frequency like daily, twice daily etc.</li><li><strong>A cloud database.</strong> Where the data from every tool is stored and prepared. There are several good options, including Google BigQuery, Microsoft Fabric, Azure SQL and Snowflake. This guide uses Google BigQuery, which suits the data volumes of most small builders.</li><li><strong>A Power BI model.</strong> The layer that joins everything together and holds the calculations.</li><li><strong>The reports.</strong> What the owner and the team actually open, on a laptop or a phone.</li></ol><p>Nobody has to change how they work with the tools daily. The reporting system only reads from those tools.</p><h2 id="step-1">Step 1: Start with the questions, then map the tools</h2><p>Don’t start with the data. Start with the questions the business needs answered every week, such as:</p><ul><li>Which marketing source brings clients who actually sign?</li><li>How many jobs are waiting on permits?</li><li>How long does a lead take to become a signed contract?</li><li>Are we collecting cash as fast as we bill it?</li></ul><p>Then map each question to the tools that hold the answer, and check how each tool lets its data out. Most modern business tools offer an API, which is a secure way for another program to request data. Where there’s no API, scheduled exports or a Python script that collects the files can do the job instead.</p><p>This step shapes everything that follows. It’s also where gaps show up early, such as leads that never get a source recorded, or jobs created without a customer attached.</p><h2 id="step-2">Step 2: Pull the data automatically</h2><p>Next, write a script that requests the data from each tool on a schedule. Python is the usual choice. To keep it independent of anyone’s computer, run it in the cloud as a scheduled job, for example a Google Cloud Run function triggered by Cloud Scheduler.</p><figure><img src="../../images/articles/setup-cloud-run.webp" width="1600" height="604" loading="lazy" decoding="async" alt="Screenshot of a Google Cloud Run function and the Cloud Scheduler job that runs the data pull on a schedule."></figure><p>A reliable data pull needs to handle a few things:</p><ul><li><strong>Pagination.</strong> Tools hand data over in pages, so the script keeps asking until it has everything.</li><li><strong>Retries.</strong> Connections drop, so the script tries again before giving up.</li><li><strong>A run log.</strong> Every run is recorded, so you can see what was loaded and when.</li><li><strong>Failure alerts.</strong> If a run fails, an email goes out so it’s fixed before anyone sees a stale number.</li></ul><p>Where a tool allows it, use read-only access. The reporting system never needs to change anything in the source tools.</p><h2 id="step-3">Step 3: Store and prepare the data in layers</h2><p>Inside the database, the data moves through a few layers (the common architecture is bronze, silver and gold layers) before it reaches Power BI. How they’re built is a technical detail, but it helps to know why they exist.</p><ul><li><strong>Bronze:</strong> Keep an untouched copy of what each tool sent. If a number is ever questioned, you can trace it back to exactly what JobTread or QuickBooks said on that day.</li><li><strong>Silver:</strong> Clean the data once, in one place. Make names and formats consistent, remove test records, and translate custom fields into plain labels. Every report then uses the same cleaned version.</li><li><strong>Gold:</strong> Keep the business rules in one place. Write once what counts as a signed job, or when revenue gets counted, and use it everywhere. That’s what makes a number on one report match the same number on another.</li></ul><figure><img src="../../images/articles/setup-bigquery-layers.webp" width="860" height="546" loading="lazy" decoding="async" alt="Screenshot of BigQuery showing the bronze, silver and gold layers of a reporting database."></figure><p>This is also where privacy gets handled. CRM records hold personal details, so carry through only the fields the reports actually need.</p><h2 id="step-4">Step 4: Build the Power BI model and reports</h2><p>With clean data in BigQuery, build the Power BI model. This is where the tools finally meet: the same client, lead and job are linked across all three systems. The calculations live here too, such as close rate, days from lead to contract and cash collected.</p><figure><img src="../../images/articles/setup-power-bi-model.webp" width="1232" height="774" loading="lazy" decoding="async" alt="Screenshot of a Power BI data model linking clients, leads, jobs, invoices and payments."></figure><p>Then build the report pages around the questions from step 1. Schedule the Power BI refresh to run after each data pull, so the reports are current when someone opens them.</p><figure><img src="../../images/articles/setup-executive-overview.webp" width="1600" height="973" loading="lazy" decoding="async" alt="Sample Power BI Executive Overview report for a fictional builder, Summit Casitas, showing total invoiced, cash collected, the lead to signed job funnel, days from lead to signed contract and projects requiring attention."></figure><h2 id="step-5">Step 5: Check every number against the source</h2><p>Before anyone relies on the reporting system, reconcile it against the tools it came from. For example:</p><ul><li>Total billed per job in Power BI should match the invoices in QuickBooks.</li><li>Open opportunities should match what GoHighLevel shows.</li><li>Active jobs should match the job list in JobTread.</li></ul><p>Every mismatch gets explained or fixed. This step matters more than any chart, because a reporting system people doubt gets abandoned.</p><h2 id="tools">What this looks like with JobTread, GoHighLevel and QuickBooks</h2><p>Here’s how those steps play out with three tools common in growing building companies, including what we’ve found makes each one tricky.</p><h3>JobTread</h3><p><strong>What to pull:</strong> jobs, customers and locations, documents such as estimates, invoices and bills, cost items, and the custom fields builders use to track things like job status and build type.</p><p><strong>What makes it tricky:</strong></p><ul><li>JobTread doesn’t reliably record when a record was last changed. Each pull should therefore reload a recent window of data with some overlap, so nothing slips through.</li><li>Volumes grow fast. A few hundred jobs can carry tens of thousands of cost lines, so requests have to be sized carefully or the tool rejects them.</li><li>Job stages often live in custom fields, and every builder sets these up differently. Learning how the company uses them is part of step 1.</li></ul><h3>GoHighLevel</h3><p><strong>What to pull:</strong> contacts, opportunities, pipelines and stages, appointments and lead sources.</p><p><strong>What makes it tricky:</strong></p><ul><li>Every agency sets up pipelines and stages its own way, so no two builders’ GoHighLevel accounts look alike.</li><li>Contact records hold personal data. Bring across only an approved list of fields and leave the rest in GoHighLevel.</li><li>Lead source is only as useful as it is consistent. If many leads have no source, flag it in step 1 so it can be fixed going forward.</li></ul><h3>QuickBooks Online</h3><p><strong>What to pull:</strong> customers, invoices, payments and bills.</p><p><strong>Connect it to JobTread first.</strong> To get the most out of QuickBooks, it should be integrated with JobTread. Invoices and bills created in JobTread then sync to QuickBooks with the job attached. Payments recorded in QuickBooks can be traced back to the JobTread job and document they belong to. Without that link, matching billing and payments to jobs becomes guesswork based on names.</p><p><strong>What makes it tricky:</strong></p><ul><li>QuickBooks access expires regularly and has to be renewed automatically in the background, or the data quietly stops updating.</li><li>Anything entered directly in QuickBooks, outside the JobTread sync, won’t carry the job link. Those records need their own matching rules.</li><li>Accounting dates and project dates tell different stories. An invoice date and the job phase it relates to don’t always line up, so decide which date answers which question.</li></ul><h2 id="lead">Following one lead through all three tools</h2><p>Here’s where it comes together, using a fictional builder, Summit Casitas.</p><ol><li><strong>March, GoHighLevel.</strong> A homeowner clicks a Google Ads ad for backyard casitas and fills in the form. GoHighLevel records her as a contact with Google Ads as the source, and her opportunity moves through “appointment set” and “proposal sent.”</li><li><strong>May, JobTread.</strong> She signs. The project manager creates the job in JobTread with the contract value and the build type.</li><li><strong>The following months, JobTread and QuickBooks.</strong> Her deposit invoice and progress invoices are created in JobTread and sync to QuickBooks, where each payment is recorded against them.</li></ol><p>On their own, those are three records in three tools. Two connections link them:</p><ul><li><strong>JobTread to QuickBooks</strong> through the sync, so payments trace straight back to the job.</li><li><strong>GoHighLevel to JobTread</strong> through the details they share, such as email, phone and address, plus a small mapping table for the few that don’t match automatically.</li></ul><figure><img src="../../images/articles/setup-lead-journey.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Diagram following one lead from GoHighLevel to JobTread to QuickBooks, ending as one row in Power BI: Google Ads source, 61 days to contract, $185,000 contract value, $92,500 billed and $74,000 collected."></figure><p>Once they’re linked, it becomes one story: a Google Ads lead, 61 days from first contact to signed contract, and a contract value with the share collected so far. Across every lead and job, that answers questions that used to need three exports and an afternoon:</p><ul><li>What does a signed contract cost by marketing source?</li><li>How long does it take a lead to become a contract?</li><li>How much of what we’ve billed have we actually collected?</li></ul><h2 id="other-tools">Using different tools? The process stays the same</h2><p>The five steps don’t change with the tools. What changes is how the data comes out, and what makes each tool tricky.</p><div class="tbl"><table><thead><tr><th scope="col">What the tool does</th><th scope="col">Example in this guide</th><th scope="col">The same process works with</th></tr></thead><tbody><tr><td>Project management</td><td>JobTread</td><td>Other construction and project management tools</td></tr><tr><td>CRM</td><td>GoHighLevel</td><td>HubSpot, Salesforce and other CRMs</td></tr><tr><td>Accounting</td><td>QuickBooks Online</td><td>Xero and other accounting tools</td></tr><tr><td>Everything else</td><td>Google Sheets</td><td>Excel files, ad platforms, scheduling tools</td></tr></tbody></table></div><p>The one requirement is a way to get the data out, through an API, regular exports or a script that collects files.</p><h2 id="running">Keeping it running</h2><p>A reporting system needs looking after once it’s live. Tools update their APIs, someone adds a new custom field in JobTread, a QuickBooks connection needs renewing, or the business adds a new service line. Each of these can quietly break a number.</p><p>Build in failure alerts from the start, check the run log regularly, and re-run the step 5 checks whenever something in the source tools changes. That’s what keeps people trusting the numbers month after month.</p><h2 id="faq">Frequently asked questions</h2><h3>Why use a cloud database instead of connecting Power BI directly to each tool?</h3><p>Tools like JobTread and GoHighLevel don’t come with ready-made Power BI connectors. While they do provide an API where Power Query can use to pull, this turn to be very slow, especially with high volumes of data. A cloud database keeps the full history and joins the tools in one place. Refreshes stay fast and don’t depend on a computer being switched on.</p><h3>Which cloud database should a small builder use?</h3><p>Any of the common options works. Google BigQuery is used in this guide because it handles small data volumes well and costs little at that size. Microsoft Fabric suits companies already deep in the Microsoft ecosystem.</p><h3>What does it cost to run each month?</h3><p>At a typical small builder’s data volumes, the cloud side usually costs very little, often within Google’s free usage limits. The main running cost is a Power BI licence for each person who views the reports.</p><h3>How often should the data refresh?</h3><p>Twice a day suits most builders. It can run more often if the business needs it.</p><h3>Does it slow down JobTread, GoHighLevel or QuickBooks?</h3><p>No. The data pulls are small, read-only requests, and they can be scheduled outside busy hours.</p><h3>What happens when one of the tools changes?</h3><p>The failure alerts from step 2 flag it. The script then needs updating, and the step 5 checks should be run again.</p><h2 id="help">Need help with your reporting?</h2><p>If you’d like help setting up a reporting system like this, send a note below with the tools you use and what you’re trying to see.</p>
+      <form class="qform article-form" id="aform" action="https://api.web3forms.com/submit" method="POST" data-success="Thanks, your note is on its way. I’ll reply by email.">
+        <input type="hidden" name="access_key" value="f4418f3c-71ec-45c3-b4f8-87b9f2bc95b7">
+        <input type="hidden" name="subject" value="Blog: how to set up a reporting system">
+        <input type="hidden" name="from_name" value="Blueribbon Analytics Website">
+        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-label="Leave this box empty">
+        <div class="frow">
+          <div class="field"><label for="a-name">Name</label><input id="a-name" name="name" type="text" autocomplete="name" required></div>
+          <div class="field"><label for="a-email">Work email</label><input id="a-email" name="email" type="email" autocomplete="email" required></div>
+        </div>
+        <div class="field"><label for="a-tools">Which tools do you use?</label><input id="a-tools" name="tools" type="text" placeholder="e.g. JobTread, QuickBooks, GoHighLevel"></div>
+        <div class="field"><label for="a-msg">What are you trying to see?</label><textarea id="a-msg" name="message" required></textarea></div>
+        <div class="fact"><button class="btn btn-cta" type="submit">Send my note</button><span class="status" role="status" aria-live="polite"></span></div>
+      </form>
+      <div class="share" role="group" aria-label="Share this article">
+      <span class="share-l">Share this article</span>
+      <a class="share-b" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblueribbonanalytics.com%2Fresources%2Fhow-to-set-up-a-reporting-system-power-bi%2F" target="_blank" rel="noopener" data-share="linkedin"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24"><path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn</a>
+      <a class="share-b" href="mailto:?subject=How%20to%20Set%20Up%20a%20Reporting%20System%20for%20a%20Building%20Company&amp;body=Worth%20a%20read%3A%20https%3A//blueribbonanalytics.com/resources/how-to-set-up-a-reporting-system-power-bi/" data-share="email"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24"><path d="M3 6h18v12H3z M3 7l9 6 9-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Email</a>
+      <button class="share-b" type="button" data-copy="https://blueribbonanalytics.com/resources/how-to-set-up-a-reporting-system-power-bi/" data-share="copy"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1 M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="copy-t">Copy link</span></button>
+    </div>
+      <div class="sec-cta"><a class="btn btn-cta" href="https://tidycal.com/royce/30-minute-meeting-m5n5yjx-mpyvo7q" data-book="article">Book a 30-minute call <svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-arrow"/></svg></a></div>
+      <p class="related">Keep reading: <a href="../why-every-home-builder-needs-a-reporting-system/">why every home builder needs a reporting system</a> or <a href="../../#results">see client results</a>.</p>
+    </div>
+    </div>
+  </article>
+</main>
+
+<footer class="shell">
+  <div class="panel foot-panel">
+    <div class="ft">
+      <div>
+        <div class="ft-brand"><img src="../../images/mark.png" width="22" height="46" loading="lazy" alt=""><span>Blueribbon Analytics</span></div>
+        <p>Blueribbon connects the systems you already use into one automated reporting system, so you can see your whole business in one place.</p>
+      </div>
+      <div>
+        <p class="fh">Navigate</p>
+        <ul><li><a href="../../">Home</a></li><li><a href="../../#system">How it works</a></li><li><a href="../../#results">Reporting systems</a></li><li><a href="../../#faq">FAQ</a></li><li><a href="../../#question">Ask a question</a></li></ul>
+      </div>
+      <div>
+        <p class="fh">Connect</p>
+        <ul><li><a href="mailto:royce@blueribbonanalytics.com">royce@blueribbonanalytics.com</a></li><li><a href="https://page.famewall.io/blueribbonanalytics" target="_blank" rel="noopener">Client testimonials</a></li><li><a class="in" href="https://www.linkedin.com/in/roycemekolle/" target="_blank" rel="noopener" aria-label="Royce Mekolle on LinkedIn"><svg aria-hidden="true" viewBox="0 0 24 24"><path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn</a></li></ul>
+      </div>
+      <div>
+        <p class="fh">Book time</p>
+        <ul><li><a href="https://tidycal.com/royce/30-minute-meeting-m5n5yjx-mpyvo7q" target="_blank" rel="noopener" data-book="resources-footer">30 minute discovery call</a></li></ul>
+      </div>
+    </div>
+    <div class="foot">
+      <span>&copy; <span id="year">2026</span> Blueribbon Analytics. All rights reserved.</span>
+      <a href="../../privacy/">Privacy policy</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../../js/main.js?v=20261029a" defer></script>
+</body>
+</html>

@@ -20,4 +20,5 @@
 - FAQ: https://blueribbonanalytics.com/#faq
 - Book a 30-minute call: https://tidycal.com/royce/30-minute-meeting-m5n5yjx-mpyvo7q
 - Article, Why every home builder needs a reporting system: https://blueribbonanalytics.com/resources/why-every-home-builder-needs-a-reporting-system/
+- Article, How to set up a reporting system for a building company (JobTread, GoHighLevel, QuickBooks, BigQuery, Power BI): https://blueribbonanalytics.com/resources/how-to-set-up-a-reporting-system-power-bi/
 - Privacy: https://blueribbonanalytics.com/privacy/
