@@ -4,33 +4,28 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#050C1C">
+<meta name="theme-color" content="#F2F4F8">
 <title>Booking Confirmed | Blueribbon Analytics</title>
 <link rel="icon" href="../images/favicon.png" type="image/png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&amp;family=Manrope:wght@400..800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&amp;family=Manrope:wght@400..800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"></noscript>
-<link rel="stylesheet" href="../css/style.css?v=20261029a">
+<link rel="preload" href="../fonts/schibsted-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../css/style.css?v=20261101a">
 <style>
-  .bc-main{min-height:100vh; display:grid; align-content:center; padding-block:7rem 2rem;}
-  .bc-panel{padding:clamp(2rem,5vw,5rem); text-align:center; background:
-    radial-gradient(900px 480px at 50% -10%, rgba(91,141,255,.22), transparent 65%), var(--panel);}
-  .bc-check{width:84px; height:84px; margin:0 auto 1.8rem; border-radius:50%; display:grid; place-items:center;
-    background:rgba(242,192,99,.12); border:1px solid rgba(242,192,99,.45); box-shadow:0 0 60px -6px rgba(242,192,99,.5);}
-  .bc-check svg{width:38px; height:38px; fill:none; stroke:var(--gold); stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round;}
-  .bc-panel h1{font-size:clamp(2.4rem,5.4vw,5rem); margin-bottom:1.2rem;}
-  .bc-panel .lede{margin-inline:auto; max-width:46rem;}
-  .bc-card{max-width:62rem; margin:clamp(2rem,4vw,3.5rem) auto 0; text-align:left; padding:clamp(1.4rem,3vw,2.6rem); border-radius:24px; background:var(--panel-2); border:1px solid var(--line-2);}
-  .bc-card h2{font-size:clamp(1.5rem,2.2vw,2.2rem); margin-bottom:1.2rem;}
+  .bc-main{min-height:100vh; display:grid; align-content:center;}
+  .bc-panel{padding-top:calc(var(--nav-h) + clamp(3rem,6vw,5rem)); text-align:center;}
+  .bc-check{width:84px; height:84px; margin:0 auto 1.8rem; border-radius:50%; display:grid; place-items:center; background:var(--gold); box-shadow:0 20px 40px -18px rgba(224,174,0,.8);}
+  .bc-check svg{width:38px; height:38px; fill:none; stroke:var(--navy); stroke-width:2.6; stroke-linecap:round; stroke-linejoin:round;}
+  .bc-panel h1{font-size:var(--fs-h1); margin-bottom:1.2rem;}
+  .bc-panel .lede{margin-inline:auto; max-width:44rem;}
+  .bc-card{max-width:56rem; margin:clamp(2.5rem,4vw,3.5rem) auto 0; text-align:left; padding:clamp(1.5rem,3vw,2.5rem); border-radius:var(--r-lg); background:var(--card); border:1px solid var(--line); box-shadow:var(--shadow);}
+  .bc-card h2{font-size:clamp(1.4rem,2vw,1.75rem); margin-bottom:1.2rem;}
   .bc-step{display:grid; grid-template-columns:3rem minmax(0,1fr); gap:1rem; padding:1.1rem 0; border-top:1px solid var(--line); align-items:start;}
   .bc-step:first-of-type{border-top:0; padding-top:0;}
-  .bc-step-num{font-family:var(--mono); font-size:.85rem; color:var(--gold); padding-top:.2rem;}
-  .bc-step p{color:var(--muted); font-size:1.02rem; line-height:1.6;}
-  .bc-step strong{color:var(--text);}
-  .bc-foot{margin-top:clamp(2rem,4vw,3rem); display:grid; gap:.9rem; justify-items:center; font-size:.85rem; color:var(--dim);}
-  .bc-foot a.back{color:var(--text); font-weight:700; border-bottom:1px solid var(--gold); padding-bottom:.15rem;}
-  .bc-foot a.back:hover{color:var(--gold);}
+  .bc-step-num{font-size:.85rem; font-weight:650; letter-spacing:.08em; color:var(--gold-text); padding-top:.2rem;}
+  .bc-step p{color:var(--slate); font-size:1.02rem; line-height:1.65;}
+  .bc-step strong{color:var(--ink);}
+  .bc-foot{margin-top:clamp(2rem,4vw,3rem); display:grid; gap:.9rem; justify-items:center; font-size:.88rem; color:var(--dim);}
+  .bc-foot a.back{color:var(--navy); font-weight:650; border-bottom:2px solid var(--gold); padding-bottom:.15rem;}
+  .bc-foot a.back:hover{color:var(--link);}
 </style>
 <!-- Tracking settings: fill these in, the page is safe to upload before you do -->
 <script>
@@ -66,7 +61,7 @@
   <div class="shell">
     <div class="nav-in">
       <a class="brand" href="https://blueribbonanalytics.com" aria-label="Blueribbon Analytics, home">
-        <img src="../images/mark.png" width="16" height="34" alt="">
+        <img src="../images/mark-navy.png" width="15" height="34" alt="">
         <span>Blueribbon Analytics</span>
       </a>
       <div class="nav-actions"><a class="btn btn-ghost btn-sm" href="https://blueribbonanalytics.com">Return to homepage</a></div>
