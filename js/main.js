@@ -299,3 +299,46 @@
     }
   });
 })();
+
+/* Keep section links aligned while images, fonts and testimonials settle.
+   Stop correcting as soon as the visitor starts interacting. */
+(function () {
+  var stop = function () {}, restart;
+  restart = function () {
+    stop();
+    if (!location.hash) return;
+    var id;
+    try { id = decodeURIComponent(location.hash.slice(1)); } catch (e) { return; }
+    var target = document.getElementById(id);
+    if (!target) return;
+    var active = true, timer, queued = false;
+    function align() {
+      queued = false;
+      if (!active) return;
+      target.scrollIntoView({ behavior: 'instant', block: 'start' });
+    }
+    function schedule() {
+      if (!active || queued) return;
+      queued = true;
+      requestAnimationFrame(align);
+    }
+    var observer = window.ResizeObserver ? new ResizeObserver(schedule) : null;
+    var events = ['wheel', 'touchstart', 'pointerdown', 'keydown'];
+    stop = function () {
+      active = false;
+      clearTimeout(timer);
+      if (observer) observer.disconnect();
+      document.removeEventListener('load', schedule, true);
+      events.forEach(function (name) { window.removeEventListener(name, stop, true); });
+    };
+    events.forEach(function (name) { window.addEventListener(name, stop, { capture: true, passive: true }); });
+    document.addEventListener('load', schedule, true);
+    if (observer) observer.observe(document.body);
+    if (document.fonts) document.fonts.ready.then(schedule);
+    schedule();
+    timer = setTimeout(stop, 12000);
+  };
+  window.addEventListener('hashchange', restart);
+  window.addEventListener('pageshow', restart);
+  restart();
+})();
