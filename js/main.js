@@ -326,7 +326,7 @@
     var events = ['wheel', 'touchstart', 'pointerdown', 'keydown'];
     stop = function () {
       active = false;
-      clearTimeout(timer);
+      clearInterval(timer);
       if (observer) observer.disconnect();
       document.removeEventListener('load', schedule, true);
       events.forEach(function (name) { window.removeEventListener(name, stop, true); });
@@ -336,7 +336,10 @@
     if (observer) observer.observe(document.body);
     if (document.fonts) document.fonts.ready.then(schedule);
     schedule();
-    timer = setTimeout(stop, 12000);
+    timer = setInterval(function () {
+      var desired = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+      if (Math.abs(target.getBoundingClientRect().top - desired) > 2) schedule();
+    }, 250);
   };
   window.addEventListener('hashchange', restart);
   window.addEventListener('pageshow', restart);
