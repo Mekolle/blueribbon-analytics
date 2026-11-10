@@ -219,8 +219,7 @@ main > section.panel:nth-of-type(even){background:var(--mist);}
 .src .ic{width:2.5em; height:2.5em; border-radius:.7em; background:var(--cream); display:grid; place-items:center; flex-shrink:0;}
 .src .ic svg{width:1.35em; height:1.35em; fill:none; stroke:var(--navy); stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round;}
 .src b{display:block; font-weight:650; font-size:1em; line-height:1.15; color:var(--navy); white-space:nowrap;}
-.src.more{background:transparent; border:1.5px dashed var(--line-2); box-shadow:none;}
-.src.more .ic{background:var(--mist);}
+.src.more{background:var(--card); border:1.5px dashed var(--line-2);}
 .flow{display:block; width:100%; height:clamp(40px,11cqw,64px); overflow:visible;}
 .flow-down{height:clamp(22px,5cqw,30px);}
 .stage .pth{fill:none; stroke:rgba(1,40,117,.25); stroke-width:1.5; stroke-linecap:round; stroke-dasharray:1;}
